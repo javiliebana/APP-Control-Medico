@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="400.0" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fitHeight="117.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <image>
+                        <Image url="@../../../../Desktop/virus.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets top="50.0" />
+                     </GridPane.margin>
+                  </ImageView>
+                  <Label text="Registro" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets top="170.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <children>
+                        <JFXTextField prefWidth="213.0" promptText="Nombre">
+                           <VBox.margin>
+                              <Insets top="-40.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField promptText="Apellidos">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXTextField promptText="Usuario" text="Correo electrónico">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <JFXPasswordField promptText="Contraseña">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXPasswordField>
+                        <JFXPasswordField promptText="Repetir contraseña">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </JFXPasswordField>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton text="Aceptar">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton alignment="CENTER_RIGHT" text="Cancelar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </VBox>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
