@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="400.0" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="400.0" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -76,12 +76,12 @@
                         </JFXPasswordField>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton text="Aceptar">
+                              <JFXButton fx:id="registerButton" onMouseClicked="#doRegister" text="Aceptar">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </JFXButton>
-                              <JFXButton alignment="CENTER_RIGHT" text="Cancelar">
+                              <JFXButton fx:id="cancelRegisterButton" alignment="CENTER_RIGHT" onMouseClicked="#cancelRegister" text="Cancelar">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
