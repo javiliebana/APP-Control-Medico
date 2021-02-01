@@ -34,9 +34,9 @@ public class JsonUtils {
 
 		try (Reader reader = new FileReader(sFile)) {
 			Gson gson = new Gson();
-			Type tipoListaEmpleados = new TypeToken<ArrayList<User>>() {
+			Type tipoListaUsuarios = new TypeToken<ArrayList<User>>() {
 			}.getType();
-			usuarios = gson.fromJson(reader, tipoListaEmpleados);
+			usuarios = gson.fromJson(reader, tipoListaUsuarios);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

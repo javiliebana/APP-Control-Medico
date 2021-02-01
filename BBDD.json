@@ -1,7 +1,7 @@
 [
 	{
-		"username": "pepeSL",
-		"password": "kikoscan",
+		"username": "admin",
+		"password": "123",
 		"rol": "paciente",
 		"sexo": "hombre",
 		"nombre": "Jose",
@@ -11,28 +11,38 @@
 		{
 		
 			"fecha": "12/11/2017",
-			"descripcion": "guagua"
+			"descripcion": "qqqqqqqqqqqqqqq"
+		},
+		{
+		
+			"fecha": "13/11/2017",
+			"descripcion": "oooooooooooooooooooo"
+		},
+		{
+		
+			"fecha": "18/11/2017",
+			"descripcion": "bbbbbbbbbbbbbbbbbbb"
 		},
 		{
 			"fecha": "13/11/2018",
-			"descripcion": "guagua"
+			"descripcion": "cccccccccccccccccccccccc"
 		}
 		],
 		
-		"lista_historia_medico": [
+		"lista_sensor_temp": [
 		{
 		
 			"fecha": "12/11/2017",
-			"temp_d": "35.9"
+			"temp_d": "35.9",
 			"temp_n" : "37.0"
 		},
 		{
 			"fecha": "13/11/2017",
-			"temp_d": "35.1"
+			"temp_d": "35.1",
 			"temp_n" : "36.4"
 		}
 		],
-		"lista_historia_medico": [
+		"lista_sensor_mov": [
 		{
 		
 			"fecha": "02/11/2017",
@@ -40,7 +50,7 @@
 		}
 		],
 			
-		"lista_historia_medico": [
+		"lista_id_familiares": [
 		{
 		
 			"nombre": "Laura",

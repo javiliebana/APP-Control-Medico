@@ -49,27 +49,27 @@
                   </Label>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <children>
-                        <JFXTextField prefWidth="213.0" promptText="Nombre">
+                        <JFXTextField fx:id="textFieldUser" prefWidth="213.0" promptText="Usuario">
                            <VBox.margin>
                               <Insets top="-40.0" />
                            </VBox.margin>
                         </JFXTextField>
-                        <JFXTextField promptText="Apellidos">
+                        <JFXTextField fx:id="textFieldName" promptText="Nombre">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </JFXTextField>
-                        <JFXTextField promptText="Usuario" text="Correo electrónico">
+                        <JFXTextField fx:id="textFieldSurname" promptText="Apellidos">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </JFXTextField>
-                        <JFXPasswordField promptText="Contraseña">
+                        <JFXPasswordField fx:id="textFieldPW" promptText="Contraseña">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </JFXPasswordField>
-                        <JFXPasswordField promptText="Repetir contraseña">
+                        <JFXPasswordField fx:id="textFieldRPW" promptText="Repetir contraseña">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
