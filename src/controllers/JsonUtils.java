@@ -17,7 +17,7 @@ public class JsonUtils {
 	
 	static String sFile = "BBDD.json";
 
-	private static void serializarArrayAJson(ArrayList<User> lista_usuarios) {
+	public static void serializarArrayAJson(ArrayList<User> lista_usuarios) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try {
 			FileWriter writer = new FileWriter(sFile);
@@ -37,6 +37,7 @@ public class JsonUtils {
 			Type tipoListaUsuarios = new TypeToken<ArrayList<User>>() {
 			}.getType();
 			usuarios = gson.fromJson(reader, tipoListaUsuarios);
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

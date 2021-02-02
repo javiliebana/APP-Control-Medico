@@ -29,6 +29,13 @@ public class SensorTemp {
 		this.temp_n = temp_n;
 	}
 
+	public SensorTemp(String fecha, String temp_d, String temp_n) {
+		super();
+		this.fecha = fecha;
+		this.temp_d = temp_d;
+		this.temp_n = temp_n;
+	}
+
 	public SensorTemp() {
 		super();
 	}

@@ -47,7 +47,7 @@ public class RegisterController {
 			loader.setLocation(getClass().getResource("../views/Login.fxml"));
 			AnchorPane mypane = (AnchorPane) loader.load();
 			Scene scene = new Scene(mypane);
-
+			stage = new Stage();
 			stage.setTitle("Register");
 			stage.setScene(scene);
 			stage.show();
