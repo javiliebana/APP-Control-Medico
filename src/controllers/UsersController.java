@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import modelos.HistoriaMedico;
+import modelos.SensorMov;
 import modelos.SensorTemp;
 import modelos.User;
 
@@ -39,6 +40,9 @@ public class UsersController {
 
 	@FXML
 	private JFXTextArea lblPoliza;
+	
+	 @FXML
+	 private JFXTextArea txrareaAlert;
 
 	@FXML
 	private TabPane tabPane;
@@ -66,6 +70,7 @@ public class UsersController {
 
 		boolean isday = true;
 		boolean newday = true;
+		boolean correctvalue = isNumeric(etTempDay.getText().toString());
 
 		// fecha actual
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -80,7 +85,7 @@ public class UsersController {
 			}
 
 		}
-		if (isday && newday) {
+		if (isday && newday && correctvalue) {
 
 			// valor noche = 0 para despues buscar el obj temperatura con valor noche=0 y
 			// reemplazarlo
@@ -103,6 +108,9 @@ public class UsersController {
 		} else if (isday && !newday) {
 			JOptionPane.showMessageDialog(null, "Solo una toma de temperatura de dia y otra de noche", "Error",
 					JOptionPane.WARNING_MESSAGE);
+		} else if (!correctvalue) {
+			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
+					JOptionPane.WARNING_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(null, "Ya ha introducido una temperatura", "Error",
 					JOptionPane.WARNING_MESSAGE);
@@ -114,38 +122,47 @@ public class UsersController {
 	void enviarTempNight(MouseEvent event) {
 
 		boolean isnight = false;
+		boolean correctvalue = isNumeric(etTempNight.getText().toString());
 		String temp_day = "0";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDateTime now = LocalDateTime.now();
 		String fecha = dtf.format(now).toString();
 		String temp_night = etTempNight.getText().toString();
-		for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
 
-			if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
-				isnight = true;
-			}
-			if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
-				user.getLista_sensor_temp().get(i).setTemp_n(temp_night);
+		if (correctvalue) {
+			for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
+
+				if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
+					isnight = true;
+				}
+				if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
+					user.getLista_sensor_temp().get(i).setTemp_n(temp_night);
+				}
+
 			}
 
-		}
-		if (isnight) {
-			ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-			for (int i = 0; i < list_user.size(); i++) {
-				if (list_user.get(i).getUsername().equals(user.getUsername())) {
-					for (SensorTemp temp : list_user.get(i).getLista_sensor_temp()) {
-						if (temp.getFecha().equals(fecha)) {
-							temp.setTemp_n(temp_night);
+			if (isnight) {
+				ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+				for (int i = 0; i < list_user.size(); i++) {
+					if (list_user.get(i).getUsername().equals(user.getUsername())) {
+						for (SensorTemp temp : list_user.get(i).getLista_sensor_temp()) {
+							if (temp.getFecha().equals(fecha)) {
+								temp.setTemp_n(temp_night);
+							}
 						}
 					}
 				}
+
+				JsonUtils.serializarArrayAJson(list_user);
+				mostrarDatos(user);
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
+						JOptionPane.WARNING_MESSAGE);
 			}
 
-			JsonUtils.serializarArrayAJson(list_user);
-			mostrarDatos(user);
-
 		} else {
-			JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
+			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
 					JOptionPane.WARNING_MESSAGE);
 		}
 
@@ -158,6 +175,7 @@ public class UsersController {
 		lblApellidos.setText(user.apellidos);
 		lblPoliza.setText(user.getPoliza());
 		String dato_temp = "";
+		String dato_sensor_mov="";
 
 		// sacamos los años para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
@@ -165,7 +183,6 @@ public class UsersController {
 			String date = h.getFecha().substring(h.getFecha().length() - 4);
 			if (!list_year.contains(date)) {
 				list_year.add(date);
-				System.out.println(date);
 			}
 		}
 		for (String s : list_year) {
@@ -187,12 +204,32 @@ public class UsersController {
 
 		}
 
-		ArrayList<SensorTemp> lista_temp = user.getLista_sensor_temp();
-		for (SensorTemp t : lista_temp) {
+		for (SensorTemp t : user.getLista_sensor_temp()) {
 			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
+		
+		for (SensorMov sm : user.getLista_sensor_mov()) {
+			if (sm.getAlerta().equals("T")) {
+			dato_sensor_mov +=sm.getFecha()+"\n"+"      Ha salido del domicilio\n";
+			}
+			
+			
+		}
+		txrareaAlert.setText(dato_sensor_mov);
 
+	}
+
+	public static boolean isNumeric(String strNum) {
+		if (strNum == null) {
+			return false;
+		}
+		try {
+			double d = Double.parseDouble(strNum);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
 }
