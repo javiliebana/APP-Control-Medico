@@ -16,7 +16,7 @@ public class User {
 	public ArrayList<SensorMov> lista_sensor_mov;
 	public ArrayList<IdFamiliares> lista_id_familiares;
 	public String id_medico;
-	public String id_pacientes;
+	public String chat;
 
 	public String getUsername() {
 		return username;
@@ -114,12 +114,12 @@ public class User {
 		this.id_medico = id_medico;
 	}
 
-	public String getId_pacientes() {
-		return id_pacientes;
+	public String getChat() {
+		return chat;
 	}
 
-	public void setId_pacientes(String id_pacientes) {
-		this.id_pacientes = id_pacientes;
+	public void setChat(String chat) {
+		this.chat = chat;
 	}
 
 	public User() {

@@ -81,19 +81,45 @@ public class LoginController {
 			for (User user : lista_usuarios) {
 				if (textfielduser.getText().equals(user.getUsername())
 						&& passwordfieldPW.getText().equals(user.getPassword())) {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/Users_GUI.fxml"));
-					UsersController controluser =  new UsersController();
-					loader.setController(controluser);
-					Parent root2 = loader.load();
-					controluser.mostrarDatos(user);
 					
-					stage = new Stage();
-					stage.setTitle("User");
-					stage.setScene(new Scene(root2));
-					stage.show();
-					// cerramos la ventana del login
-					Stage stage = (Stage) buttonLogin.getScene().getWindow();
-					stage.close();
+					
+					
+					if (user.getRol().equals("M")) {
+						
+						FXMLLoader loader_medic = new FXMLLoader(getClass().getResource("../views/VentanaSupervisor.fxml"));
+						MedicController contro_medic =  new MedicController();
+						loader_medic.setController(contro_medic);
+						Parent root2 = loader_medic.load();
+						contro_medic.cargarDatosPacientes(user,lista_usuarios);
+						
+						stage = new Stage();
+						stage.setTitle("User");
+						stage.setScene(new Scene(root2));
+						stage.show();
+						// cerramos la ventana del login
+						Stage stage = (Stage) buttonLogin.getScene().getWindow();
+						stage.close();
+						
+					} else {
+						
+						FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/Users_GUI.fxml"));
+						UsersController contro_luser =  new UsersController();
+						loader_user.setController(contro_luser);
+						Parent root2 = loader_user.load();
+						contro_luser.mostrarDatos(user);
+						
+						stage = new Stage();
+						stage.setTitle("User");
+						stage.setScene(new Scene(root2));
+						stage.show();
+						// cerramos la ventana del login
+						Stage stage = (Stage) buttonLogin.getScene().getWindow();
+						stage.close();
+
+					}
+					
+					
+					
 					
 
 				}

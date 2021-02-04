@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutX="304.0" layoutY="177.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -21,7 +20,7 @@
                         <Image url="@../../../../Desktop/330087979d837e6d51faeb778ec503af.png" />
                      </image>
                   </ImageView>
-                  <Label text="Dr. Álvarez">
+                  <Label fx:id="lblName" text="Dr. Álvarez">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -30,7 +29,7 @@
             </ToolBar>
          </top>
          <center>
-            <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <ListView fx:id="lvPacientes" onMouseClicked="#handleMouseClick" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
