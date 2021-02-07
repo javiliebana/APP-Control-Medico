@@ -66,6 +66,9 @@ public class LoginController {
 
 	@FXML
 	private void loginUser(MouseEvent event) {
+		
+		//login comprobamos los campos y luego verificamos con la base de datos
+		
 		try {
 			if (textfielduser.getText().trim().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atención",
@@ -82,7 +85,7 @@ public class LoginController {
 				if (textfielduser.getText().equals(user.getUsername())
 						&& passwordfieldPW.getText().equals(user.getPassword())) {
 					
-					
+					//verificar por roles M=medico U=paciente F=familiar
 					
 					if (user.getRol().equals("M")) {
 						

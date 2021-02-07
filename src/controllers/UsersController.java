@@ -79,8 +79,10 @@ public class UsersController {
 
 		for (SensorTemp st : user.getLista_sensor_temp()) {
 			if (st.getTemp_n().equals("0")) {
+				//si la temperatura de la noche es 0 es porque se hacreado ya un objeto con la temperatura de dia
 				isday = false;
 			} else if (st.getFecha().equals(fecha)) {
+				//si la fecha corresponde a la fecha del dia de hoy, el usuario ya ha registrado su temperatura diaria
 				newday = false;
 			}
 
@@ -123,7 +125,6 @@ public class UsersController {
 
 		boolean isnight = false;
 		boolean correctvalue = isNumeric(etTempNight.getText().toString());
-		String temp_day = "0";
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDateTime now = LocalDateTime.now();
 		String fecha = dtf.format(now).toString();
@@ -133,6 +134,7 @@ public class UsersController {
 			for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
 
 				if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
+					//si existe una temperatura =0 entonces si es de noche
 					isnight = true;
 				}
 				if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
@@ -169,6 +171,8 @@ public class UsersController {
 	}
 
 	public void mostrarDatos(User user) {
+		
+		//cargamos los datos del usuario
 		this.user = user;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());

@@ -45,6 +45,11 @@
         "fecha": "10/01/2021",
         "temp_d": "34",
         "temp_n": "34"
+      },
+      {
+        "fecha": "07/02/2021",
+        "temp_d": "37",
+        "temp_n": "39"
       }
     ],
     "lista_sensor_mov": [
