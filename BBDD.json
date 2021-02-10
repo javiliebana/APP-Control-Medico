@@ -17,7 +17,7 @@
         "descripcion": "oooooooooooooooooooo"
       },
       {
-        "fecha": "18/11/2017",
+        "fecha": "14/11/2017",
         "descripcion": "bbbbbbbbbbbbbbbbbbb"
       },
       {
@@ -27,30 +27,66 @@
     ],
     "lista_sensor_temp": [
       {
-        "fecha": "12/11/2017",
+        "fecha": "02/01/2021",
         "temp_d": "35.9",
         "temp_n": "37.0"
       },
       {
         "fecha": "03/01/2021",
-        "temp_d": "34",
-        "temp_n": "34"
+        "temp_d": "34.6",
+        "temp_n": "38.3"
       },
       {
         "fecha": "04/01/2021",
-        "temp_d": "34",
-        "temp_n": "34"
+        "temp_d": "41.0",
+        "temp_n": "45.0"
       },
       {
+        "fecha": "05/01/2021",
+        "temp_d": "36.0",
+        "temp_n": "39.3"
+      },
+	  {
+        "fecha": "06/01/2021",
+        "temp_d": "41.0",
+        "temp_n": "34.2"
+      },
+	  {
+        "fecha": "07/01/2021",
+        "temp_d": "35.5",
+        "temp_n": "36.0"
+      },
+	  {
+        "fecha": "08/01/2021",
+        "temp_d": "36.9",
+        "temp_n": "34.3"
+      },
+	  {
+        "fecha": "09/01/2021",
+        "temp_d": "46.0",
+        "temp_n": "42.4"
+      },
+	  {
         "fecha": "10/01/2021",
-        "temp_d": "34",
-        "temp_n": "34"
+        "temp_d": "35.5",
+        "temp_n": "60.0"
       },
-      {
-        "fecha": "07/02/2021",
-        "temp_d": "37",
-        "temp_n": "39"
+	  {
+        "fecha": "11/01/2021",
+        "temp_d": "34.3",
+        "temp_n": "39.8"
+      },
+	  {
+        "fecha": "12/01/2021",
+        "temp_d": "41.0",
+        "temp_n": "42.5"
+      },
+	  {
+        "fecha": "13/01/2021",
+        "temp_d": "34.4",
+        "temp_n": "35.5"
       }
+      
     ],
     "lista_sensor_mov": [
       {
@@ -115,8 +151,10 @@
       }
     ],
     "lista_id_familiares": [
-      {},
-      {}
+      {
+		"id" : "paco",
+		"name" : "jose"
+	  }
     ],
     "id_medico": "medic",
     "chat": ""
@@ -124,7 +162,7 @@
   {
     "username": "paco",
     "password": "123",
-    "rol": "U",
+    "rol": "F",
     "sexo": "hombre",
     "nombre": "Jose",
     "apellidos": "Perez Soto",
@@ -166,8 +204,7 @@
       }
     ],
     "lista_id_familiares": [
-      {},
-      {}
+	{}
     ],
     "id_medico": "medic",
     "chat": ""

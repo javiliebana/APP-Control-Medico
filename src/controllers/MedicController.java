@@ -40,13 +40,13 @@ public class MedicController {
 		}
 		
 		
-		FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/Users_GUI.fxml"));
-		UsersController contro_luser =  new UsersController();
-		loader_user.setController(contro_luser);
+		FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaMedicUsuarios.fxml"));
+		MedicUserController control_user =  new MedicUserController();
+		loader_user.setController(control_user);
 		Parent root2;
 		try {
 			root2 = loader_user.load();
-			contro_luser.mostrarDatos(selected_user);
+			control_user.mostrarDatos(selected_user,lista_usuarios);
 			Stage stage = new Stage();
 			stage.setTitle("User");
 			stage.setScene(new Scene(root2));
