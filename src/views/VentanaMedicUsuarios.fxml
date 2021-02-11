@@ -164,7 +164,7 @@
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <JFXListView fx:id="lvfamiliares" layoutX="119.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <JFXListView fx:id="lvfamiliares" layoutX="119.0" onMouseClicked="#handleMouseClick" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children></AnchorPane>
                            </content>
                         </Tab>

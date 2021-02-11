@@ -1,11 +1,15 @@
 package controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -18,6 +22,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelos.HistoriaMedico;
 import modelos.IdFamiliares;
 import modelos.SensorMov;
@@ -26,6 +32,8 @@ import modelos.User;
 
 public class MedicUserController {
 	public User user;
+	public User selected_user;
+	public ArrayList<User> lista_usuarios;
 
 	@FXML
 	private Label lblNombre;
@@ -59,11 +67,44 @@ public class MedicUserController {
 
 	@FXML
 	private JFXListView<String> lvfamiliares;
+	
+	@FXML
+	public void handleMouseClick(MouseEvent arg0) {
+		String list_value=lvfamiliares.getSelectionModel().getSelectedItem();
+		String[] valores_user=list_value.split(" ");
+		String username=valores_user[0].replaceAll("@", "").trim();
+		System.out.println(username);
+		
+		for (User u : lista_usuarios) {
+			if (u.getUsername().equals(username)) {
+				selected_user=u;
+			}
+		}
+		
+		
+		FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/FamilyMedicChat.fxml"));
+		ChatMedicFController control_user =  new ChatMedicFController();
+		loader_user.setController(control_user);
+		Parent root2;
+		try {
+			root2 = loader_user.load();
+			control_user.mostrarDatos(selected_user);
+			Stage stage = new Stage();
+			stage.setTitle("User");
+			stage.setScene(new Scene(root2));
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 
 	public void mostrarDatos(User user, ArrayList<User> lista_usuarios) {
 
 		// cargamos los datos del usuario
 		this.user = user;
+		this.lista_usuarios=lista_usuarios;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
