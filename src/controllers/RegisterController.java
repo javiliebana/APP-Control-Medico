@@ -87,7 +87,11 @@ public class RegisterController {
 			} else if (!textFieldRPW.getText().equals(textFieldPW.getText())) {
 				JOptionPane.showMessageDialog(null, "Las contraeñas deben coincidir", "Atención",
 						JOptionPane.WARNING_MESSAGE);
-			} else {
+			}else if(comboBox.getValue()==null) {
+				JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Atención",
+						JOptionPane.WARNING_MESSAGE);
+			}
+			else {
 				boolean alreadyexist = false;
 				ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
 				for (User user : lista_usuarios) {
@@ -112,12 +116,12 @@ public class RegisterController {
 					String chat="";
 					for (User user : lista_usuarios) {
 						String name = user.getNombre() + " " + user.getApellidos();
-						if (name.equals(comboBox.getValue())) {
+						if (name.equals(comboBox.getValue().toString())) {
 							v_user = user.getUsername();
 						}
 					}
 
-					User u = new User(username, password, rol, nombre, apellidos, chat,v_user);
+					User u = new User(username, password, rol, nombre, apellidos,"", v_user,chat);
 					lista_usuarios.add(u);
 					JsonUtils.serializarArrayAJson(lista_usuarios);
 					FXMLLoader loader = new FXMLLoader();

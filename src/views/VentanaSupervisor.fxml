@@ -17,7 +17,7 @@
                <items>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Desktop/330087979d837e6d51faeb778ec503af.png" />
+                        <Image url="@../../img/medic.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="lblName" text="Dr. Álvarez">

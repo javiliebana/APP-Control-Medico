@@ -34,7 +34,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <image>
-                        <Image url="@../../../../Desktop/virus.png" />
+                        <Image url="@../../img/virus.png" />
                      </image>
                   </ImageView>
                   <Label text="APP" GridPane.columnIndex="1" GridPane.halignment="CENTER">

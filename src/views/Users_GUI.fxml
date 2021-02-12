@@ -55,7 +55,7 @@
                                                                         <Insets left="10.0" top="5.0" />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <Label text="Póliza">
+                                                                  <Label text="Descripción">
                                                                      <VBox.margin>
                                                                         <Insets left="10.0" top="5.0" />
                                                                      </VBox.margin>
@@ -238,7 +238,7 @@
                      <children>
                         <ImageView fitHeight="50.0" fitWidth="50.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <image>
-                              <Image url="@../../../../Downloads/hombre.png" />
+                              <Image url="@../../img/hombre.png" />
                            </image></ImageView>
                      </children>
                   </AnchorPane>

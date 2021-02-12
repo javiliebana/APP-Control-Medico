@@ -79,7 +79,7 @@ public class LoginController {
 			for (User user : lista_usuarios) {
 				if (textfielduser.getText().equals(user.getUsername())
 						&& passwordfieldPW.getText().equals(user.getPassword())) {
-					
+					System.out.println("usuario logado: "+user.getUsername());
 					//verificar por roles M=medico U=paciente F=familiar
 					
 					if (user.getRol().equals("M")) {

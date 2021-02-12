@@ -1,12 +1,16 @@
 [
   {
-    "username": "admin",
+    "username": "jorge_canle",
     "password": "123",
     "rol": "U",
     "sexo": "hombre",
-    "nombre": "El puto admin",
-    "apellidos": "vos queres ser admin",
-    "poliza": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nombre": "Jorge",
+    "apellidos": "Canle Ortega",
+    "poliza": " Paciente masculino de 53 años de edad que concurre al servicio de guardia del hospital Centenario por un cuadro caracterizado por un episodio de hematemesis de escasa intensidad, dos horas previas a la consulta, refiere almuerzo 3 horas antes y que la misma fue precedida de náuseas.
+Tres meses anteriores al vómito sanguinolento el paciente refiere dolor abdominal de intensidad creciente con el correr de los meses, de carácter quemante y opresivo en la región epigástrica que se irradia hacia hipocondrio izquierdo y espalda y que se alivia con la ingesta de alcalinos o antiácidos comerciales.
+Refiere además distensión abdominal del mismo tiempo de evolución.
+Niega fiebre, diarrea, constipación, disfagia, odinofagia, fiebre.
+Como antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de vino tinto por día desde hace más de 30 años",
     "lista_historia_medico": [
       {
         "fecha": "12/11/2017",
@@ -106,6 +110,11 @@
         "fecha": "11/02/2021",
         "temp_d": "41",
         "temp_n": "34"
+      },
+      {
+        "fecha": "12/02/2021",
+        "temp_d": "18",
+        "temp_n": "45"
       }
     ],
     "lista_sensor_mov": [
@@ -171,6 +180,7 @@
       }
     ],
     "id_medico": "medic",
+    "v_usuario": "",
     "chat": ""
   },
   {
@@ -218,6 +228,7 @@
       }
     ],
     "id_medico": "medic",
+    "v_usuario": "",
     "chat": ""
   },
   {
@@ -248,6 +259,7 @@
       }
     ],
     "id_medico": "medic",
+    "v_usuario": "",
     "chat": ""
   },
   {
@@ -262,6 +274,7 @@
     "lista_sensor_temp": [],
     "lista_sensor_mov": [],
     "id_medico": "",
+    "v_usuario": "",
     "chat": ""
   },
   {
@@ -269,8 +282,9 @@
     "password": "123",
     "rol": "F",
     "nombre": "javi",
-    "apellidos": "112",
-    "chat": "admin",
-    "v_usuario": ""
+    "apellidos": "lie",
+    "id_medico": "",
+    "v_usuario": "admin",
+    "chat": ""
   }
 ]
