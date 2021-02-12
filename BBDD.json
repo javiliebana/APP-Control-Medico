@@ -25,8 +25,20 @@
         "descripcion": "cccccccccccccccccccccccc"
       },
       {
-        "fecha": "01/02/2021",
-        "descripcion": "El paciente esta muerto"
+        "fecha": "13/04/2022",
+        "descripcion": "test"
+      },
+      {
+        "fecha": "03/02/2021",
+        "descripcion": "fasdasdas"
+      },
+      {
+        "fecha": "18/02/2021",
+        "descripcion": "test"
+      },
+      {
+        "fecha": "25/02/2021",
+        "descripcion": "test"
       }
     ],
     "lista_sensor_temp": [
@@ -158,12 +170,6 @@
         "alerta": "T"
       }
     ],
-    "lista_id_familiares": [
-      {
-        "id": "paco",
-        "name": "jose"
-      }
-    ],
     "id_medico": "medic",
     "chat": ""
   },
@@ -211,9 +217,6 @@
         "alerta": "T"
       }
     ],
-    "lista_id_familiares": [
-      {}
-    ],
     "id_medico": "medic",
     "chat": ""
   },
@@ -244,10 +247,6 @@
         "alerta": "T"
       }
     ],
-    "lista_id_familiares": [
-      {},
-      {}
-    ],
     "id_medico": "medic",
     "chat": ""
   },
@@ -262,8 +261,16 @@
     "lista_historia_medico": [],
     "lista_sensor_temp": [],
     "lista_sensor_mov": [],
-    "lista_id_familiares": [],
     "id_medico": "",
     "chat": ""
+  },
+  {
+    "username": "wilxair",
+    "password": "123",
+    "rol": "F",
+    "nombre": "javi",
+    "apellidos": "112",
+    "chat": "admin",
+    "v_usuario": ""
   }
 ]

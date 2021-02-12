@@ -86,19 +86,20 @@
                                                                         <Insets left="10.0" top="5.0" />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <JFXTextArea fx:id="lblPoliza" editable="false" prefHeight="210.0" prefWidth="464.0" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.">
+                                                                  <JFXTextArea fx:id="lblPoliza" editable="false" prefHeight="156.0" prefWidth="464.0" text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.">
                                                                      <VBox.margin>
                                                                         <Insets left="10.0" />
                                                                      </VBox.margin>
                                                                   </JFXTextArea>
                                                                </children>
                                                             </VBox>
+                                                            <Button fx:id="btnAddhist" layoutX="14.0" layoutY="235.0" mnemonicParsing="false" onMouseClicked="#addMedicHistory" prefHeight="25.0" prefWidth="142.0" text="Añadir Hist. Méidca" />
                                                          </children></AnchorPane>
                                                   </items>
                                                 </SplitPane>
                                              </children>
                                           </AnchorPane>
-                                        <AnchorPane prefHeight="220.0" prefWidth="698.0">
+                                        <AnchorPane fx:id="anchorpanehist" prefHeight="220.0" prefWidth="698.0">
                                              <children>
                                                 <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="1.7976931345862315E308" tabMaxWidth="50.0" tabMinWidth="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                              </children>
@@ -181,7 +182,7 @@
                <center>
                   <AnchorPane BorderPane.alignment="CENTER">
                      <children>
-                        <TextArea AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TextArea onMouseClicked="#addMedicHistory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                         <ScrollBar layoutX="186.0" layoutY="245.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                      <BorderPane.margin>

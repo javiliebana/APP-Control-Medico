@@ -3,7 +3,9 @@ package controllers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -180,6 +182,10 @@ public class UsersController {
 		lblPoliza.setText(user.getPoliza());
 		String dato_temp = "";
 		String dato_sensor_mov="";
+		
+		//siempre que carguemos la ventana debemos borrar los datos del panel de citas medicas
+		List<Tab> pane_list=tabPane.getTabs();
+		tabPane.getTabs().removeAll(pane_list);
 
 		// sacamos los años para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
@@ -189,6 +195,9 @@ public class UsersController {
 				list_year.add(date);
 			}
 		}
+		//ordenamos la lista de años
+		
+		Collections.sort(list_year);
 		for (String s : list_year) {
 			accordion = new Accordion();
 			for (HistoriaMedico h : user.getLista_historia_medico()) {

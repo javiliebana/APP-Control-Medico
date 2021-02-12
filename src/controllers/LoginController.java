@@ -40,23 +40,18 @@ public class LoginController {
 	@FXML
 	void goToRegister(MouseEvent event) {
 		try {
-			/*
-			 * 
-			 * AQUI HAY UN SWITCH PARA VERIFICAR EL LOGIN Y ELEGIR EL TIPO DE ROL
-			 * 
-			 * 
-			 * 
-			 */
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../views/Register.fxml"));
-			AnchorPane mypane = (AnchorPane) loader.load();
-			Scene scene = new Scene(mypane);
+			FXMLLoader loader_register = new FXMLLoader(getClass().getResource("../views/Register.fxml"));
+			RegisterController register_controller =  new RegisterController();
+			loader_register.setController(register_controller);
+			Parent root2 = loader_register.load();
+			register_controller.cargarListaUsers();
+			
 			stage = new Stage();
-			stage.setTitle("Register");
-			stage.setScene(scene);
+			stage.setTitle("User");
+			stage.setScene(new Scene(root2));
 			stage.show();
 			// cerramos la ventana del login
-			Stage stage = (Stage) labelNewAcc.getScene().getWindow();
+			Stage stage = (Stage) buttonLogin.getScene().getWindow();
 			stage.close();
 
 		} catch (IOException e) {
@@ -103,7 +98,7 @@ public class LoginController {
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
 						stage.close();
 						
-					} else {
+					} else if(user.getRol().equals("U")){
 						
 						FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/Users_GUI.fxml"));
 						UsersController contro_luser =  new UsersController();
@@ -119,6 +114,20 @@ public class LoginController {
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
 						stage.close();
 
+					}else if(user.getRol().equals("F")) {
+						FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaFamiliaUsuarios.fxml"));
+						FamilyUserController contro_luser =  new FamilyUserController();
+						loader_user.setController(contro_luser);
+						Parent root2 = loader_user.load();
+						contro_luser.mostrarDatos(user,lista_usuarios);
+						
+						stage = new Stage();
+						stage.setTitle("User");
+						stage.setScene(new Scene(root2));
+						stage.show();
+						// cerramos la ventana del login
+						Stage stage = (Stage) buttonLogin.getScene().getWindow();
+						stage.close();
 					}
 					
 					

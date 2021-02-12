@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="327.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="327.0" prefWidth="369.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane layoutX="113.0" layoutY="83.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -33,35 +34,46 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXDatePicker fx:id="datePicker">
+                  <Label prefHeight="0.0" prefWidth="117.0" text="Seleccione una fecha: ">
                      <VBox.margin>
-                        <Insets top="60.0" />
+                        <Insets left="15.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXDatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="249.0">
+                     <VBox.margin>
+                        <Insets left="5.0" top="10.0" />
                      </VBox.margin>
                   </JFXDatePicker>
-                  <JFXTextArea fx:id="txdescripcion" prefHeight="95.0" prefWidth="259.0" style="-fx-border-style: 1;">
+                  <Label text="Descripcion de la cita: ">
                      <VBox.margin>
-                        <Insets top="60.0" />
+                        <Insets left="15.0" top="20.0" />
                      </VBox.margin>
+                  </Label>
+                  <JFXTextArea fx:id="txdescripcion" prefHeight="69.0" prefWidth="364.0">
+                     <VBox.margin>
+                        <Insets left="5.0" top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets right="120.0" />
+                     </padding>
                   </JFXTextArea>
+                  <HBox alignment="CENTER" prefHeight="90.0" prefWidth="369.0">
+                     <children>
+                        <JFXButton fx:id="btnAccept" onMouseClicked="#acceptMedicHistory" text="Aceptar">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="btnCancel" onMouseClicked="#cancelMedicHistory" text="Cancelar">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </center>
-         <left>
-            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="141.0">
-               <children>
-                  <Label prefHeight="0.0" prefWidth="117.0" text="Seleccione una fecha: ">
-                     <VBox.margin>
-                        <Insets top="65.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label text="Descripcion de la cita: ">
-                     <VBox.margin>
-                        <Insets top="70.0" />
-                     </VBox.margin>
-                  </Label>
-               </children>
-            </VBox>
-         </left>
       </BorderPane>
    </children>
 </AnchorPane>

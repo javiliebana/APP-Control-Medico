@@ -24,4 +24,11 @@ public class HistoriaMedico {
 		super();
 	}
 
+	public HistoriaMedico(String fecha, String descripcion) {
+		super();
+		this.fecha = fecha;
+		this.descripcion = descripcion;
+	}
+	
+
 }
