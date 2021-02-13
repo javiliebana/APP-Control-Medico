@@ -6,11 +6,7 @@
     "sexo": "hombre",
     "nombre": "Jorge",
     "apellidos": "Canle Ortega",
-    "poliza": " Paciente masculino de 53 años de edad que concurre al servicio de guardia del hospital Centenario por un cuadro caracterizado por un episodio de hematemesis de escasa intensidad, dos horas previas a la consulta, refiere almuerzo 3 horas antes y que la misma fue precedida de náuseas.
-Tres meses anteriores al vómito sanguinolento el paciente refiere dolor abdominal de intensidad creciente con el correr de los meses, de carácter quemante y opresivo en la región epigástrica que se irradia hacia hipocondrio izquierdo y espalda y que se alivia con la ingesta de alcalinos o antiácidos comerciales.
-Refiere además distensión abdominal del mismo tiempo de evolución.
-Niega fiebre, diarrea, constipación, disfagia, odinofagia, fiebre.
-Como antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de vino tinto por día desde hace más de 30 años",
+    "poliza": " Paciente masculino de 53 años de edad que concurre al servicio de guardia del hospital Centenario por un cuadro caracterizado por un episodio de hematemesis de escasa intensidad, dos horas previas a la consulta, refiere almuerzo 3 horas antes y que la misma fue precedida de náuseas.\nTres meses anteriores al vómito sanguinolento el paciente refiere dolor abdominal de intensidad creciente con el correr de los meses, de carácter quemante y opresivo en la región epigástrica que se irradia hacia hipocondrio izquierdo y espalda y que se alivia con la ingesta de alcalinos o antiácidos comerciales.\nRefiere además distensión abdominal del mismo tiempo de evolución.\nNiega fiebre, diarrea, constipación, disfagia, odinofagia, fiebre.\nComo antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de vino tinto por día desde hace más de 30 años",
     "lista_historia_medico": [
       {
         "fecha": "12/11/2017",
@@ -284,7 +280,7 @@ Como antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de
     "nombre": "javi",
     "apellidos": "lie",
     "id_medico": "",
-    "v_usuario": "admin",
+    "v_usuario": "jorge_canle",
     "chat": ""
   }
 ]

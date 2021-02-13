@@ -3,6 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.jfoenix.controls.JFXListView;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,10 +26,10 @@ public class MedicController {
 	private Label lblName;
 
 	@FXML
-	private ListView<String> lvPacientes;
-	
-	@FXML
-	public void handleMouseClick(MouseEvent arg0) {
+    private JFXListView<String> lvPacientes;
+
+    @FXML
+    void handleMouseClick(MouseEvent event) {
 		String list_value=lvPacientes.getSelectionModel().getSelectedItem();
 		String[] valores_user=list_value.split(" ");
 		String username=valores_user[0].replaceAll("@", "").trim();

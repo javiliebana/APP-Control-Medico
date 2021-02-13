@@ -82,13 +82,14 @@ public class MedicUserController {
 		AddMedicHistoryController control_user = new AddMedicHistoryController();
 		loader_user.setController(control_user);
 
-		Parent root2;
 		try {
-			root2 = loader_user.load();
+			Parent root2 = loader_user.load();
 			control_user.loadData(user, lista_usuarios, this);
 			Stage stage = new Stage();
 			stage.setTitle("User");
-			stage.setScene(new Scene(root2));
+			Scene chatscene=new Scene(root2);
+			chatscene.getStylesheets().addAll(getClass().getResource("../css/chat.css").toExternalForm());
+			stage.setScene(chatscene);
 			stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -143,7 +144,7 @@ public class MedicUserController {
 		
 		String dato_temp = "";
 		String dato_sensor_mov = "";
-		// sacamos los años para ver cuantos tabs creamos
+		// sacamos los aï¿½os para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
 		for (HistoriaMedico h : user.getLista_historia_medico()) {
 			String date = h.getFecha().substring(h.getFecha().length() - 4);
@@ -151,7 +152,7 @@ public class MedicUserController {
 				list_year.add(date);
 			}
 		}
-		//ordenamos la lista de años
+		//ordenamos la lista de aï¿½os
 		Collections.sort(list_year);
 		
 		for (String s : list_year) {
@@ -159,7 +160,7 @@ public class MedicUserController {
 			for (HistoriaMedico h : user.getLista_historia_medico()) {
 				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
 					TitledPane tp = new TitledPane();
-					tp.setText("Historial médico " + h.getFecha());
+					tp.setText("Historial mï¿½dico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
@@ -174,7 +175,7 @@ public class MedicUserController {
 		}
 
 		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
+			dato_temp += t.getFecha() + "\nTemperatura de dï¿½a: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
@@ -195,7 +196,7 @@ public class MedicUserController {
 		graph_temp.setTitle("Registro temperaturas");
 
 		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Temperatura día");
+		series1.setName("Temperatura dï¿½a");
 		XYChart.Series series2 = new XYChart.Series();
 		series2.setName("Temperatura noche");
 

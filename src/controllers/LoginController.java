@@ -66,13 +66,13 @@ public class LoginController {
 		
 		try {
 			if (textfielduser.getText().trim().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 						
 			}
 
 			else if (passwordfieldPW.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Contraseña", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Contraseï¿½a", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			}
 			ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
@@ -89,10 +89,11 @@ public class LoginController {
 						loader_medic.setController(contro_medic);
 						Parent root2 = loader_medic.load();
 						contro_medic.cargarDatosPacientes(user,lista_usuarios);
-						
+						Scene medicscene= new Scene(root2);
+						medicscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
 						stage.setTitle("User");
-						stage.setScene(new Scene(root2));
+						stage.setScene(medicscene);
 						stage.show();
 						// cerramos la ventana del login
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
@@ -105,10 +106,11 @@ public class LoginController {
 						loader_user.setController(contro_luser);
 						Parent root2 = loader_user.load();
 						contro_luser.mostrarDatos(user);
-						
+						Scene userscene= new Scene(root2);
+						userscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
 						stage.setTitle("User");
-						stage.setScene(new Scene(root2));
+						stage.setScene(userscene);
 						stage.show();
 						// cerramos la ventana del login
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
@@ -120,10 +122,11 @@ public class LoginController {
 						loader_user.setController(contro_luser);
 						Parent root2 = loader_user.load();
 						contro_luser.mostrarDatos(user,lista_usuarios);
-						
+						Scene familyscene= new Scene(root2);
+						familyscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
 						stage.setTitle("User");
-						stage.setScene(new Scene(root2));
+						stage.setScene(familyscene);
 						stage.show();
 						// cerramos la ventana del login
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();

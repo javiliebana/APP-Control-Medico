@@ -1,0 +1,51 @@
+.button:hover{
+	-fx-background-color: #4B6FF2;
+}
+.button{
+	-fx-background-color: #4B6FF2;
+	-fx-text-fill:#EAEAEE;
+}
+.label{
+	-fx-text-fill:#4d4d4d; 
+	-fx-font-size: 12.0px;
+}
+.text-field{
+	-fx-text-fill:#4d4d4d; 
+	
+}
+.text-field:focused {
+    -fx-text-fill:#4B6FF2;
+}
+.combo-box:focused{
+	 -fx-text-fill:#4B6FF2;
+}
+.tab-pane *.tab-header-area *.tab-header-background {
+  -fx-background-color:transparent;
+  -fx-tab-min-width:120.0px;
+  -fx-tab-max-width:120.0px;
+  -fx-tab-min-height:50.0px;
+  -fx-tab-max-height:50.0px;
+}
+
+.tab {
+  -fx-background-color:#D6D6D7;
+}
+
+.tab:selected {
+    -fx-background-color:#4B6FF2 ;
+    -fx-text-base-color: #EAEAEE ;
+}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: #4B6FF2;
+    -fx-text-fill: #D6D6D7;
+}
+
+.list-cell:even {
+    -fx-background-color: #D6D6D7;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #4B6FF2;
+    -fx-text-fill: #D6D6D7;
+}
+    

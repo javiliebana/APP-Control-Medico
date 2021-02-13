@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -29,7 +29,7 @@
             </ToolBar>
          </top>
          <center>
-            <ListView fx:id="lvPacientes" onMouseClicked="#handleMouseClick" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <JFXListView fx:id="lvPacientes" onMouseClicked="#handleMouseClick" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

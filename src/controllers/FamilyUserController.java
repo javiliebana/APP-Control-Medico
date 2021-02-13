@@ -77,11 +77,10 @@ public class FamilyUserController {
 			User v_user=null;
 			//cargamos la ventana con los datos del paciente (su v_user)
 		for (User v_u : lista_usuarios) {
-			System.out.println("comparamos v_username: "+v_u.getUsername()+" con username: "+v_u.getUsername());
 			if (v_u.getUsername().equals(user.getV_usuario())) {
 				System.out.println("v_user: "+v_u.getUsername());
 				v_user=v_u;
-				lblTituloNombre.setText(v_u.getNombre() + " " + v_user.getApellidos());
+				lblTituloNombre.setText("Viendo el perfil de: "+v_u.getNombre() + " " + v_user.getApellidos());
 				lblNombre.setText(v_u.getNombre());
 				lblApellidos.setText(v_u.apellidos);
 				lblPoliza.setText(v_u.getPoliza());
@@ -95,7 +94,7 @@ public class FamilyUserController {
 		
 		String dato_temp = "";
 		String dato_sensor_mov = "";
-		// sacamos los años para ver cuantos tabs creamos
+		// sacamos los aï¿½os para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
 		for (HistoriaMedico h : v_user.getLista_historia_medico()) {
 			String date = h.getFecha().substring(h.getFecha().length() - 4);
@@ -103,7 +102,7 @@ public class FamilyUserController {
 				list_year.add(date);
 			}
 		}
-		//ordenamos la lista de años
+		//ordenamos la lista de aï¿½os
 		Collections.sort(list_year);
 		
 		for (String s : list_year) {
@@ -111,7 +110,7 @@ public class FamilyUserController {
 			for (HistoriaMedico h : v_user.getLista_historia_medico()) {
 				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
 					TitledPane tp = new TitledPane();
-					tp.setText("Historial médico " + h.getFecha());
+					tp.setText("Historial mÃ©dico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
@@ -126,7 +125,7 @@ public class FamilyUserController {
 		}
 
 		for (SensorTemp t : v_user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
+			dato_temp += t.getFecha() + "\nTemperatura de dÃ­a: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
@@ -147,7 +146,7 @@ public class FamilyUserController {
 		graph_temp.setTitle("Registro temperaturas");
 
 		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Temperatura día");
+		series1.setName("Temperatura dÃ­a");
 		XYChart.Series series2 = new XYChart.Series();
 		series2.setName("Temperatura noche");
 

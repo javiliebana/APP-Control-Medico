@@ -13,7 +13,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/Login.fxml"));
 		AnchorPane pane = loader.load();
 		Scene scene = new Scene(pane);
-		scene.getStylesheets().addAll(getClass().getResource("../css/application.css").toExternalForm());
+		scene.getStylesheets().addAll(getClass().getResource("../css/loginregister.css").toExternalForm());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();

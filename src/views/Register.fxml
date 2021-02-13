@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -21,7 +20,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <GridPane BorderPane.alignment="CENTER">
+            <GridPane stylesheets="@../css/loginregister.css" BorderPane.alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
@@ -37,12 +36,12 @@
                         <Image url="@../../img/virus.png" />
                      </image>
                      <GridPane.margin>
-                        <Insets top="50.0" />
+                        <Insets top="30.0" />
                      </GridPane.margin>
                   </ImageView>
                   <Label text="Registro" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <GridPane.margin>
-                        <Insets top="170.0" />
+                        <Insets top="150.0" />
                      </GridPane.margin>
                      <font>
                         <Font size="22.0" />
@@ -52,7 +51,7 @@
                      <children>
                         <JFXTextField fx:id="textFieldUser" prefWidth="213.0" promptText="Usuario">
                            <VBox.margin>
-                              <Insets top="-50.0" />
+                              <Insets top="-60.0" />
                            </VBox.margin>
                         </JFXTextField>
                         <JFXTextField fx:id="textFieldName" promptText="Nombre">
@@ -80,20 +79,16 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </JFXComboBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <JFXButton fx:id="registerButton" onMouseClicked="#doRegister" text="Aceptar">
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                              <JFXButton fx:id="cancelRegisterButton" alignment="CENTER_RIGHT" onMouseClicked="#cancelRegister" text="Cancelar">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                           </children>
-                        </HBox>
+                        <JFXButton fx:id="registerButton" buttonType="RAISED" onMouseClicked="#doRegister" prefHeight="30.0" prefWidth="212.0" text="Aceptar">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="cancelRegisterButton" alignment="CENTER" buttonType="RAISED" onMouseClicked="#cancelRegister" prefHeight="30.0" prefWidth="212.0" text="Cancelar">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
                      <GridPane.margin>
                         <Insets />
