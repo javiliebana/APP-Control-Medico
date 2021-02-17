@@ -177,7 +177,38 @@
     ],
     "id_medico": "medic",
     "v_usuario": "",
-    "chat": ""
+    "lista_chat": [
+      {
+        "fecha": "14/02/2021",
+        "usuario": "Jorge",
+        "texto": "hola"
+      },
+      {
+        "fecha": "17/02/2021",
+        "usuario": "Jorge",
+        "texto": "hola"
+      },
+      {
+        "fecha": "17/02/2021",
+        "usuario": "Jorge",
+        "texto": "hola"
+      },
+      {
+        "fecha": "18/02/2021",
+        "usuario": "Jorge",
+        "texto": "hola"
+      },
+      {
+        "fecha": "18/02/2021",
+        "usuario": "Jorge",
+        "texto": "que tal"
+      },
+      {
+        "fecha": "18/02/2021",
+        "usuario": "Jorge",
+        "texto": "adsfads"
+      }
+    ]
   },
   {
     "username": "paco",
@@ -225,7 +256,13 @@
     ],
     "id_medico": "medic",
     "v_usuario": "",
-    "chat": ""
+    "lista_chat": [
+      {
+        "fecha": "14/02/2021",
+        "usuario": "Paco",
+        "texto": "hola"
+      }
+    ]
   },
   {
     "username": "pepe",
@@ -255,8 +292,7 @@
       }
     ],
     "id_medico": "medic",
-    "v_usuario": "",
-    "chat": ""
+    "v_usuario": ""
   },
   {
     "username": "medic",
@@ -270,8 +306,7 @@
     "lista_sensor_temp": [],
     "lista_sensor_mov": [],
     "id_medico": "",
-    "v_usuario": "",
-    "chat": ""
+    "v_usuario": ""
   },
   {
     "username": "wilxair",
@@ -280,7 +315,6 @@
     "nombre": "javi",
     "apellidos": "lie",
     "id_medico": "",
-    "v_usuario": "jorge_canle",
-    "chat": ""
+    "v_usuario": "jorge_canle"
   }
 ]

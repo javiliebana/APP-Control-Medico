@@ -16,7 +16,7 @@ public class User {
 	public ArrayList<SensorMov> lista_sensor_mov;
 	public String id_medico;
 	public String v_usuario;
-	public String chat;
+	public ArrayList<Chat> lista_chat;
 
 	public String getUsername() {
 		return username;
@@ -106,12 +106,12 @@ public class User {
 		this.id_medico = id_medico;
 	}
 
-	public String getChat() {
-		return chat;
+	public ArrayList<Chat> getLista_chat() {
+		return lista_chat;
 	}
 
-	public void setChat(String chat) {
-		this.chat = chat;
+	public void setLista_chat(ArrayList<Chat> lista_chat) {
+		this.lista_chat = lista_chat;
 	}
 
 	public String getV_usuario() {
@@ -127,7 +127,7 @@ public class User {
 	}
 
 	public User(String username, String password, String rol, String nombre, String apellidos, String id_medico,
-			String v_usuario, String chat) {
+			String v_usuario) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -136,7 +136,7 @@ public class User {
 		this.apellidos = apellidos;
 		this.id_medico = id_medico;
 		this.v_usuario = v_usuario;
-		this.chat = chat;
+
 	}
 
 }

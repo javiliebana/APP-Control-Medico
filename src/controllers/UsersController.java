@@ -22,6 +22,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
+import modelos.Chat;
 import modelos.HistoriaMedico;
 import modelos.SensorMov;
 import modelos.SensorTemp;
@@ -60,13 +61,48 @@ public class UsersController {
 
 	@FXML
 	private TextArea textAreaTemp;
+	
+	@FXML
+    private TextArea textAreaChat;
 
+    @FXML
+    private TextField etText;
+    
+    @FXML
+    private Button btnSend;
+	
+    
 	@FXML
 	private Label lblTituloNombre;
 
 	@FXML
 	private Accordion accordion;
 
+    
+	@FXML
+	void enviarMessage(MouseEvent event) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		String fecha = dtf.format(now).toString();
+		String text = etText.getText().toString();
+		
+		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+		
+		Chat c = new Chat(fecha, user.getNombre(), user.getId_medico(), text);
+		
+		for (int i = 0; i < list_user.size(); i++) {
+			// reemplazamos el usuario por sus nuevos datos
+			if (list_user.get(i).getUsername().equals(user.getUsername())) {
+				list_user.get(i).getLista_chat().add(c);
+				user.getLista_chat().add(c);
+			}
+			
+			JsonUtils.serializarArrayAJson(list_user);
+			mostrarDatos(user);
+		}
+		etText.setText("");
+	}
+	
 	@FXML
 	void enviarTempDay(MouseEvent event) {
 
@@ -182,12 +218,17 @@ public class UsersController {
 		lblPoliza.setText(user.getPoliza());
 		String dato_temp = "";
 		String dato_sensor_mov="";
+		String auxFecha = "";
+		String text = "";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		String fecha = dtf.format(now).toString();
 		
 		//siempre que carguemos la ventana debemos borrar los datos del panel de citas medicas
 		List<Tab> pane_list=tabPane.getTabs();
 		tabPane.getTabs().removeAll(pane_list);
 
-		// sacamos los años para ver cuantos tabs creamos
+		// sacamos los aï¿½os para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
 		for (HistoriaMedico h : user.getLista_historia_medico()) {
 			String date = h.getFecha().substring(h.getFecha().length() - 4);
@@ -195,7 +236,7 @@ public class UsersController {
 				list_year.add(date);
 			}
 		}
-		//ordenamos la lista de años
+		//ordenamos la lista de aï¿½os
 		
 		Collections.sort(list_year);
 		for (String s : list_year) {
@@ -203,7 +244,7 @@ public class UsersController {
 			for (HistoriaMedico h : user.getLista_historia_medico()) {
 				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
 					TitledPane tp = new TitledPane();
-					tp.setText("Historial médico " + h.getFecha());
+					tp.setText("Historial mï¿½dico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
@@ -218,20 +259,27 @@ public class UsersController {
 		}
 
 		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
+			dato_temp += t.getFecha() + "\nTemperatura de dï¿½a: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
 		
 		for (SensorMov sm : user.getLista_sensor_mov()) {
 			if (sm.getAlerta().equals("T")) {
-			dato_sensor_mov +=sm.getFecha()+"\n"+"      Ha salido del domicilio\n";
+				dato_sensor_mov +=sm.getFecha()+"\n"+"      Ha salido del domicilio\n";
 			}
-			
-			
 		}
 		txrareaAlert.setText(dato_sensor_mov);
-
+		
+		// mostrar texto excrito en el area del chat
+		for (Chat c : user.getLista_chat()) {
+			if (!auxFecha.equals(c.getFecha())) {
+				text += c.getFecha() + "\n";
+				auxFecha = c.getFecha();	
+			}	
+			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
+		}
+		textAreaChat.setText(text);
 	}
 
 	public static boolean isNumeric(String strNum) {

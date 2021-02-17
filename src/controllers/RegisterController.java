@@ -70,25 +70,25 @@ public class RegisterController {
 	void doRegister(MouseEvent event) {
 		try {
 			if (textFieldUser.getText().trim().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			} else if (textFieldName.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Nombre", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Nombre", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			} else if (textFieldSurname.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Apellidos", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Apellidos", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			} else if (textFieldPW.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Contraseña", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Contraseï¿½a", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			} else if (textFieldRPW.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Introduce un valor para Repetir Contraseña", "Atención",
+				JOptionPane.showMessageDialog(null, "Introduce un valor para Repetir Contraseï¿½a", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			} else if (!textFieldRPW.getText().equals(textFieldPW.getText())) {
-				JOptionPane.showMessageDialog(null, "Las contraeñas deben coincidir", "Atención",
+				JOptionPane.showMessageDialog(null, "Las contraeï¿½as deben coincidir", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			}else if(comboBox.getValue()==null) {
-				JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Atención",
+				JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente", "Atenciï¿½n",
 						JOptionPane.WARNING_MESSAGE);
 			}
 			else {
@@ -121,7 +121,7 @@ public class RegisterController {
 						}
 					}
 
-					User u = new User(username, password, rol, nombre, apellidos,"", v_user,chat);
+					User u = new User(username, password, rol, nombre, apellidos,"", v_user);
 					lista_usuarios.add(u);
 					JsonUtils.serializarArrayAJson(lista_usuarios);
 					FXMLLoader loader = new FXMLLoader();
@@ -136,7 +136,7 @@ public class RegisterController {
 					Stage stage = (Stage) registerButton.getScene().getWindow();
 					stage.close();
 				} else {
-					JOptionPane.showMessageDialog(null, "Ese nombre de usuario ya existe", "Atención",
+					JOptionPane.showMessageDialog(null, "Ese nombre de usuario ya existe", "Atenciï¿½n",
 							JOptionPane.WARNING_MESSAGE);
 				}
 
