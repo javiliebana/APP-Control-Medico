@@ -21,7 +21,6 @@ public class MedicController {
 	User selected_user;
 	ArrayList<User> lista_usuarios;
 	
-	
 	@FXML
 	private Label lblName;
 
@@ -40,7 +39,6 @@ public class MedicController {
 				selected_user=u;
 			}
 		}
-		
 		
 		FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaMedicUsuarios.fxml"));
 		MedicUserController control_user =  new MedicUserController();

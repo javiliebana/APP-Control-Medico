@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,14 +19,17 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modelos.Chat;
 import modelos.HistoriaMedico;
 import modelos.SensorMov;
 import modelos.SensorTemp;
@@ -68,14 +73,51 @@ public class FamilyUserController {
 	@FXML
 	private LineChart<String, Number> graph_temp;
 
+    @FXML
+    private TextArea textAreaChat;
+
+    @FXML
+    private TextField etText;
+
+    @FXML
+    private Button btnSend;
+
+	
+	@FXML
+	void enviarMessage(MouseEvent event) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		String fecha = dtf.format(now).toString();
+		String text = etText.getText().toString();
+		
+		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+		
+		Chat c = new Chat(fecha, user.getId_medico(), user.getNombre(), text);
+		
+		for (int i = 0; i < list_user.size(); i++) {
+			// reemplazamos el usuario por sus nuevos datos
+			if (list_user.get(i).getUsername().equals(user.getUsername())) {
+				list_user.get(i).getLista_chat().add(c);
+				user.getLista_chat().add(c);
+			}
+			
+			JsonUtils.serializarArrayAJson(list_user);
+			mostrarDatos(user, list_user);
+		}
+		etText.setText("");
+	}
 
 
 	public void mostrarDatos(User user, ArrayList<User> lista_usuarios) {
 		// guardamos los datos del usuario actual para el chat
-			this.user = user;
-			this.lista_usuarios = lista_usuarios;
-			User v_user=null;
-			//cargamos la ventana con los datos del paciente (su v_user)
+		this.user = user;
+		this.lista_usuarios = lista_usuarios;
+		User v_user=null;
+		String auxFecha = "";
+		String text = "";
+		
+		
+		//cargamos la ventana con los datos del paciente (su v_user)
 		for (User v_u : lista_usuarios) {
 			if (v_u.getUsername().equals(user.getV_usuario())) {
 				System.out.println("v_user: "+v_u.getUsername());
@@ -87,10 +129,8 @@ public class FamilyUserController {
 			}
 		}
 		
-		
 		List<Tab> pane_list=tabPane.getTabs();
 		tabPane.getTabs().removeAll(pane_list);
-		
 		
 		String dato_temp = "";
 		String dato_sensor_mov = "";
@@ -137,6 +177,16 @@ public class FamilyUserController {
 
 		}
 		txrareaAlert.setText(dato_sensor_mov);
+		
+		// mostrar texto escrito en el area del chat
+		for (Chat c : user.getLista_chat()) {
+			if (!auxFecha.equals(c.getFecha())) {
+				text += c.getFecha() + "\n";
+				auxFecha = c.getFecha();	
+			}	
+			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
+		}
+		textAreaChat.setText(text);
 
 		// cargamos los datos del line chart
 		final CategoryAxis xAxis = new CategoryAxis();
@@ -156,8 +206,6 @@ public class FamilyUserController {
 			series2.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp_n())));
 		}
 		graph_temp.getData().addAll(series1, series2);
-
-	
 
 	}
 

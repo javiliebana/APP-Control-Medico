@@ -31,13 +31,13 @@
             </HBox>
          </top>
          <center>
-            <JFXTextArea fx:id="txtChat" editable="false" prefHeight="483.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+            <JFXTextArea fx:id="textAreaChat" editable="false" prefHeight="483.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="et_message" prefHeight="25.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="0.0" />
-                  <JFXButton fx:id="btn_send" layoutX="348.0" prefHeight="25.0" prefWidth="100.0" text="Enviar" AnchorPane.rightAnchor="0.0" />
+                  <TextField fx:id="etText" prefHeight="25.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="0.0" />
+                  <JFXButton fx:id="btnSend" layoutX="348.0" onMouseClicked="#enviarMessage" prefHeight="25.0" prefWidth="100.0" text="Enviar" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
          </bottom>

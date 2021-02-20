@@ -184,29 +184,16 @@
         "texto": "hola"
       },
       {
-        "fecha": "17/02/2021",
+        "fecha": "20/02/2021",
+        "medico": "medic",
         "usuario": "Jorge",
-        "texto": "hola"
+        "texto": "Hola"
       },
       {
-        "fecha": "17/02/2021",
-        "usuario": "Jorge",
-        "texto": "hola"
-      },
-      {
-        "fecha": "18/02/2021",
-        "usuario": "Jorge",
-        "texto": "hola"
-      },
-      {
-        "fecha": "18/02/2021",
-        "usuario": "Jorge",
-        "texto": "que tal"
-      },
-      {
-        "fecha": "18/02/2021",
-        "usuario": "Jorge",
-        "texto": "adsfads"
+        "fecha": "20/02/2021",
+        "medico": "Jorge",
+        "usuario": "medic",
+        "texto": "Cómo te encuentras"
       }
     ]
   },
@@ -315,6 +302,20 @@
     "nombre": "javi",
     "apellidos": "lie",
     "id_medico": "",
-    "v_usuario": "jorge_canle"
+    "v_usuario": "jorge_canle",
+    "lista_chat": [
+      {
+        "fecha": "20/02/2021",
+        "medico": "",
+        "usuario": "medic",
+        "texto": "hola"
+      },
+      {
+        "fecha": "20/02/2021",
+        "medico": "",
+        "usuario": "javi",
+        "texto": "hola"
+      }
+    ]
   }
 ]

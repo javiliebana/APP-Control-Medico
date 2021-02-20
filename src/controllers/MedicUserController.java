@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,6 +30,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modelos.Chat;
 import modelos.HistoriaMedico;
 import modelos.IdFamiliares;
 import modelos.SensorMov;
@@ -74,7 +77,40 @@ public class MedicUserController {
 
 	@FXML
 	private JFXListView<String> lvfamiliares;
+	
+    @FXML
+    private TextArea textAreaChat;
 
+    @FXML
+    private TextField etText;
+
+    @FXML
+    private Button btnSend;
+	
+	@FXML
+	void enviarMessage(MouseEvent event) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDateTime now = LocalDateTime.now();
+		String fecha = dtf.format(now).toString();
+		String text = etText.getText().toString();
+		
+		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+		
+		Chat c = new Chat(fecha, user.getNombre(), user.getId_medico(), text);
+		
+		for (int i = 0; i < list_user.size(); i++) {
+			// reemplazamos el usuario por sus nuevos datos
+			if (list_user.get(i).getUsername().equals(user.getUsername())) {
+				list_user.get(i).getLista_chat().add(c);
+				user.getLista_chat().add(c);
+			}
+			
+			JsonUtils.serializarArrayAJson(list_user);
+			mostrarDatos(user, list_user);
+		}
+		etText.setText("");
+	}
+	
 	@FXML
 	void addMedicHistory(MouseEvent event) {
 
@@ -97,7 +133,8 @@ public class MedicUserController {
 		}
 
 	}
-
+	
+	// llamar a chat con familiar
 	@FXML
 	public void handleMouseClick(MouseEvent arg0) {
 		String list_value = lvfamiliares.getSelectionModel().getSelectedItem();
@@ -117,7 +154,7 @@ public class MedicUserController {
 		Parent root2;
 		try {
 			root2 = loader_user.load();
-			control_user.mostrarDatos(selected_user);
+			control_user.mostrarDatos(selected_user, user.getId_medico());
 			Stage stage = new Stage();
 			stage.setTitle("User");
 			stage.setScene(new Scene(root2));
@@ -136,6 +173,8 @@ public class MedicUserController {
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
 		lblPoliza.setText(user.getPoliza());
+		String auxFecha = "";
+		String text = "";
 		
 		
 		List<Tab> pane_list=tabPane.getTabs();
@@ -207,13 +246,23 @@ public class MedicUserController {
 		}
 		graph_temp.getData().addAll(series1, series2);
 
-			for (User u : lista_usuarios) {
-				if (user.getUsername().equals(u.getV_usuario())) {
-					lvfamiliares.getItems().add("@" + u.getUsername() + "\n " + u.getNombre() + " " + u.getApellidos());
-				}
-
+		for (User u : lista_usuarios) {
+			if (user.getUsername().equals(u.getV_usuario())) {
+				lvfamiliares.getItems().add("@" + u.getUsername() + "\n " + u.getNombre() + " " + u.getApellidos());
 			}
-	
+		}
+		
+		txrareaAlert.setText(dato_sensor_mov);
+		
+		// mostrar texto escrito en el area del chat
+		for (Chat c : user.getLista_chat()) {
+			if (!auxFecha.equals(c.getFecha())) {
+				text += c.getFecha() + "\n";
+				auxFecha = c.getFecha();	
+			}	
+			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
+		}
+		textAreaChat.setText(text);
 
 	}
 

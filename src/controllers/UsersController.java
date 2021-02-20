@@ -77,7 +77,6 @@ public class UsersController {
 
 	@FXML
 	private Accordion accordion;
-
     
 	@FXML
 	void enviarMessage(MouseEvent event) {
@@ -88,7 +87,7 @@ public class UsersController {
 		
 		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
 		
-		Chat c = new Chat(fecha, user.getNombre(), user.getId_medico(), text);
+		Chat c = new Chat(fecha, user.getId_medico(), user.getNombre(), text);
 		
 		for (int i = 0; i < list_user.size(); i++) {
 			// reemplazamos el usuario por sus nuevos datos
@@ -123,8 +122,8 @@ public class UsersController {
 				//si la fecha corresponde a la fecha del dia de hoy, el usuario ya ha registrado su temperatura diaria
 				newday = false;
 			}
-
 		}
+		
 		if (isday && newday && correctvalue) {
 
 			// valor noche = 0 para despues buscar el obj temperatura con valor noche=0 y
@@ -207,7 +206,7 @@ public class UsersController {
 		}
 
 	}
-
+	
 	public void mostrarDatos(User user) {
 		
 		//cargamos los datos del usuario
@@ -271,7 +270,7 @@ public class UsersController {
 		}
 		txrareaAlert.setText(dato_sensor_mov);
 		
-		// mostrar texto excrito en el area del chat
+		// mostrar texto escrito en el area del chat
 		for (Chat c : user.getLista_chat()) {
 			if (!auxFecha.equals(c.getFecha())) {
 				text += c.getFecha() + "\n";
@@ -293,4 +292,6 @@ public class UsersController {
 		}
 		return true;
 	}
+	
+	
 }
