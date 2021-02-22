@@ -127,7 +127,7 @@ public class User {
 	}
 
 	public User(String username, String password, String rol, String nombre, String apellidos, String id_medico,
-			String v_usuario) {
+			String v_usuario, ArrayList<Chat> lista_chat) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -136,7 +136,10 @@ public class User {
 		this.apellidos = apellidos;
 		this.id_medico = id_medico;
 		this.v_usuario = v_usuario;
-
+		this.lista_chat = lista_chat;
 	}
+	
+	
+	
 
 }

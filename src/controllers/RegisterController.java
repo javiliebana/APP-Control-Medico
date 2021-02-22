@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modelos.Chat;
 import modelos.User;
 
 public class RegisterController {
@@ -119,8 +120,11 @@ public class RegisterController {
 							v_user = user.getUsername();
 						}
 					}
-
-					User u = new User(username, password, rol, nombre, apellidos,"", v_user);
+					ArrayList<Chat> lista_chat = new ArrayList<Chat>();
+					Chat c = new Chat("", "", "", ""); 
+					lista_chat.add(c);
+					
+					User u = new User(username, password, rol, nombre, apellidos,"", v_user, lista_chat);
 					lista_usuarios.add(u);
 					JsonUtils.serializarArrayAJson(lista_usuarios);
 					FXMLLoader loader = new FXMLLoader();
@@ -131,7 +135,7 @@ public class RegisterController {
 					stage.setTitle("Register");
 					stage.setScene(scene);
 					stage.show();
-					// cerramos la ventana del login
+					// cerramos la ventana del registro
 					Stage stage = (Stage) registerButton.getScene().getWindow();
 					stage.close();
 				} else {

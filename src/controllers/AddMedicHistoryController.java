@@ -42,7 +42,7 @@ public class AddMedicHistoryController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		try {
 			String fecha = formatter.format(datePicker.getValue()).toString();
-			if (txdescripcion.getText().toString().trim().equals("")) {
+			if (!txdescripcion.getText().toString().trim().equals("")) {
 				String description = txdescripcion.getText().toString();
 				HistoriaMedico hm = new HistoriaMedico(fecha, description);
 
@@ -57,7 +57,7 @@ public class AddMedicHistoryController {
 				Stage stage = (Stage) btnCancel.getScene().getWindow();
 				stage.close();
 			} else {
-				JOptionPane.showMessageDialog(null, "Debe introducir una descripión", "Error",
+				JOptionPane.showMessageDialog(null, "Debe introducir una descripiï¿½n", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
 

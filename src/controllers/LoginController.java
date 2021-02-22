@@ -63,18 +63,17 @@ public class LoginController {
 	private void loginUser(MouseEvent event) {
 		
 		//login comprobamos los campos y luego verificamos con la base de datos
-		
 		try {
 			if (textfielduser.getText().trim().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Introduce un valor para Usuario", "Atenci�n",
-						JOptionPane.WARNING_MESSAGE);
-						
+						JOptionPane.WARNING_MESSAGE);			
 			}
 
 			else if (passwordfieldPW.getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Introduce un valor para Contrase�a", "Atenci�n",
 						JOptionPane.WARNING_MESSAGE);
 			}
+			
 			ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
 			for (User user : lista_usuarios) {
 				if (textfielduser.getText().equals(user.getUsername())

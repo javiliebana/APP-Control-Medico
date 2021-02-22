@@ -27,6 +27,10 @@
       {
         "fecha": "13/04/2020",
         "descripcion": "El paciente ha enfermado y su temperatura actual es de 41 grados."
+      },
+      {
+        "fecha": "03/02/2021",
+        "descripcion": "El paciente presenta síntomas de COVID"
       }
     ],
     "lista_sensor_temp": [
@@ -54,51 +58,6 @@
         "fecha": "06/01/2021",
         "temp_d": "41.0",
         "temp_n": "34.2"
-      },
-      {
-        "fecha": "07/01/2021",
-        "temp_d": "35.5",
-        "temp_n": "36.0"
-      },
-      {
-        "fecha": "08/01/2021",
-        "temp_d": "36.9",
-        "temp_n": "34.3"
-      },
-      {
-        "fecha": "09/01/2021",
-        "temp_d": "46.0",
-        "temp_n": "42.4"
-      },
-      {
-        "fecha": "10/01/2021",
-        "temp_d": "35.5",
-        "temp_n": "60.0"
-      },
-      {
-        "fecha": "11/01/2021",
-        "temp_d": "34.3",
-        "temp_n": "39.8"
-      },
-      {
-        "fecha": "12/01/2021",
-        "temp_d": "41.0",
-        "temp_n": "42.5"
-      },
-      {
-        "fecha": "13/01/2021",
-        "temp_d": "34.4",
-        "temp_n": "35.5"
-      },
-      {
-        "fecha": "11/02/2021",
-        "temp_d": "41",
-        "temp_n": "34"
-      },
-      {
-        "fecha": "12/02/2021",
-        "temp_d": "18",
-        "temp_n": "45"
       }
     ],
     "lista_sensor_mov": [
@@ -303,6 +262,23 @@
         "medico": "",
         "usuario": "javi",
         "texto": "hola"
+      }
+    ]
+  },
+  {
+    "username": "maria_perez",
+    "password": "123",
+    "rol": "F",
+    "nombre": "Maria",
+    "apellidos": "Perez",
+    "id_medico": "",
+    "v_usuario": "jorge_canle",
+    "lista_chat": [
+      {
+        "fecha": "",
+        "medico": "",
+        "usuario": "",
+        "texto": ""
       }
     ]
   }
