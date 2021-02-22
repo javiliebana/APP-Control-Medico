@@ -6,39 +6,27 @@
     "sexo": "hombre",
     "nombre": "Jorge",
     "apellidos": "Canle Ortega",
-    "poliza": " Paciente masculino de 53 años de edad que concurre al servicio de guardia del hospital Centenario por un cuadro caracterizado por un episodio de hematemesis de escasa intensidad, dos horas previas a la consulta, refiere almuerzo 3 horas antes y que la misma fue precedida de náuseas.\nTres meses anteriores al vómito sanguinolento el paciente refiere dolor abdominal de intensidad creciente con el correr de los meses, de carácter quemante y opresivo en la región epigástrica que se irradia hacia hipocondrio izquierdo y espalda y que se alivia con la ingesta de alcalinos o antiácidos comerciales.\nRefiere además distensión abdominal del mismo tiempo de evolución.\nNiega fiebre, diarrea, constipación, disfagia, odinofagia, fiebre.\nComo antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de vino tinto por día desde hace más de 30 años",
+    "poliza": "Paciente masculino de 53 años de edad, 1,75 de estatura y 84 kilos que concurre al servicio de guardia del hospital Centenario por un cuadro caracterizado por un episodio de hematemesis de escasa intensidad, dos horas previas a la consulta, refiere almuerzo 3 horas antes y que la misma fue precedida de náuseas.\nTres meses anteriores al vómito sanguinolento el paciente refiere dolor abdominal de intensidad creciente con el correr de los meses, de carácter quemante y opresivo en la región epigástrica que se irradia hacia hipocondrio izquierdo y espalda y que se alivia con la ingesta de alcalinos o antiácidos comerciales.\nRefiere además distensión abdominal del mismo tiempo de evolución.\nNiega fiebre, diarrea, constipación, disfagia, odinofagia, fiebre.\nComo antecedente de jerarquía el paciente refiere ser bebedor de 1 ½ litros de vino tinto por día desde hace más de 30 años",
     "lista_historia_medico": [
       {
         "fecha": "12/11/2017",
-        "descripcion": "qqqqqqqqqqqqqqq"
+        "descripcion": "El paciente muestra un dolor en el codo izquierdo, la toma de temperatura semanal es estandar."
       },
       {
         "fecha": "13/11/2017",
-        "descripcion": "oooooooooooooooooooo"
+        "descripcion": "El paciente muestra una notable inflamacion el el codo, vamos a realizar una radiografía."
       },
       {
         "fecha": "14/11/2017",
-        "descripcion": "bbbbbbbbbbbbbbbbbbb"
+        "descripcion": "El paciente presenta una mejoría en su codo, al parecer fue debido a un golpe contra la puerta de su casa."
       },
       {
         "fecha": "13/11/2018",
-        "descripcion": "cccccccccccccccccccccccc"
+        "descripcion": "La temperatura semanal del paciente es superior a lo debido."
       },
       {
-        "fecha": "13/04/2022",
-        "descripcion": "test"
-      },
-      {
-        "fecha": "03/02/2021",
-        "descripcion": "fasdasdas"
-      },
-      {
-        "fecha": "18/02/2021",
-        "descripcion": "test"
-      },
-      {
-        "fecha": "25/02/2021",
-        "descripcion": "test"
+        "fecha": "13/04/2020",
+        "descripcion": "El paciente ha enfermado y su temperatura actual es de 41 grados."
       }
     ],
     "lista_sensor_temp": [
@@ -256,7 +244,7 @@
     "password": "123",
     "rol": "F",
     "sexo": "hombre",
-    "nombre": "Pepe",
+    "nombre": "Jose Pérez",
     "apellidos": "Gutierrez Almagro",
     "poliza": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "lista_historia_medico": [
@@ -296,11 +284,11 @@
     "v_usuario": ""
   },
   {
-    "username": "wilxair",
+    "username": "jai",
     "password": "123",
     "rol": "F",
-    "nombre": "javi",
-    "apellidos": "lie",
+    "nombre": "Javier",
+    "apellidos": "Liebana Casatro",
     "id_medico": "",
     "v_usuario": "jorge_canle",
     "lista_chat": [

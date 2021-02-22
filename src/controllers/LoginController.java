@@ -47,7 +47,7 @@ public class LoginController {
 			register_controller.cargarListaUsers();
 			
 			stage = new Stage();
-			stage.setTitle("User");
+			stage.setTitle("Ventana del paciente");
 			stage.setScene(new Scene(root2));
 			stage.show();
 			// cerramos la ventana del login
@@ -92,7 +92,7 @@ public class LoginController {
 						Scene medicscene= new Scene(root2);
 						medicscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
-						stage.setTitle("User");
+						stage.setTitle("Ventana del médico");
 						stage.setScene(medicscene);
 						stage.show();
 						// cerramos la ventana del login
@@ -109,7 +109,7 @@ public class LoginController {
 						Scene userscene= new Scene(root2);
 						userscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
-						stage.setTitle("User");
+						stage.setTitle("Ventana del paciente");
 						stage.setScene(userscene);
 						stage.show();
 						// cerramos la ventana del login
@@ -125,18 +125,13 @@ public class LoginController {
 						Scene familyscene= new Scene(root2);
 						familyscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
 						stage = new Stage();
-						stage.setTitle("User");
+						stage.setTitle("Ventana del familiar");
 						stage.setScene(familyscene);
 						stage.show();
 						// cerramos la ventana del login
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
 						stage.close();
 					}
-					
-					
-					
-					
-
 				}
 			}
 	

@@ -48,7 +48,7 @@ public class MedicController {
 			root2 = loader_user.load();
 			control_user.mostrarDatos(selected_user,lista_usuarios);
 			Stage stage = new Stage();
-			stage.setTitle("User");
+			stage.setTitle("Ventana del paciente");
 			stage.setScene(new Scene(root2));
 			stage.show();
 		} catch (IOException e) {

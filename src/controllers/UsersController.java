@@ -138,12 +138,12 @@ public class UsersController {
 				if (list_user.get(i).getUsername().equals(user.getUsername())) {
 					list_user.get(i).getLista_sensor_temp().add(st);
 					user.getLista_sensor_temp().add(st);
-
 				}
 			}
 
 			JsonUtils.serializarArrayAJson(list_user);
 			mostrarDatos(user);
+			etTempDay.setText("");
 		} else if (isday && !newday) {
 			JOptionPane.showMessageDialog(null, "Solo una toma de temperatura de dia y otra de noche", "Error",
 					JOptionPane.WARNING_MESSAGE);
@@ -154,7 +154,7 @@ public class UsersController {
 			JOptionPane.showMessageDialog(null, "Ya ha introducido una temperatura", "Error",
 					JOptionPane.WARNING_MESSAGE);
 		}
-
+		
 	}
 
 	@FXML
@@ -194,6 +194,7 @@ public class UsersController {
 
 				JsonUtils.serializarArrayAJson(list_user);
 				mostrarDatos(user);
+				etTempNight.setText("");
 
 			} else {
 				JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
@@ -204,7 +205,6 @@ public class UsersController {
 			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
 					JOptionPane.WARNING_MESSAGE);
 		}
-
 	}
 	
 	public void mostrarDatos(User user) {
@@ -243,7 +243,7 @@ public class UsersController {
 			for (HistoriaMedico h : user.getLista_historia_medico()) {
 				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
 					TitledPane tp = new TitledPane();
-					tp.setText("Historial m�dico " + h.getFecha());
+					tp.setText("Historial médico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
@@ -258,7 +258,7 @@ public class UsersController {
 		}
 
 		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de d�a: " + t.getTemp_d() + "\nTemperatura de noche: "
+			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);

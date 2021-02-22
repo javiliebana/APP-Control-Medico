@@ -102,7 +102,6 @@ public class RegisterController {
 							alreadyexist = true;
 						}
 					}
-
 				}
 
 				if (!alreadyexist) {

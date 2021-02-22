@@ -131,7 +131,6 @@ public class MedicUserController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	// llamar a chat con familiar
@@ -199,14 +198,12 @@ public class MedicUserController {
 			for (HistoriaMedico h : user.getLista_historia_medico()) {
 				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
 					TitledPane tp = new TitledPane();
-					tp.setText("Historial m�dico " + h.getFecha());
+					tp.setText("Historial médico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
 					accordion.getPanes().add(tp);
-
 				}
-
 			}
 			Tab year = new Tab(s, accordion);
 			tabPane.getTabs().add(year);
@@ -214,7 +211,7 @@ public class MedicUserController {
 		}
 
 		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de d�a: " + t.getTemp_d() + "\nTemperatura de noche: "
+			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
@@ -235,7 +232,7 @@ public class MedicUserController {
 		graph_temp.setTitle("Registro temperaturas");
 
 		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Temperatura d�a");
+		series1.setName("Temperatura día");
 		XYChart.Series series2 = new XYChart.Series();
 		series2.setName("Temperatura noche");
 
