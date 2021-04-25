@@ -1,6 +1,13 @@
 package modelos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
+
+import DDBB.Database;
 
 public class User {
 
@@ -17,6 +24,13 @@ public class User {
 	public String id_medico;
 	public String v_usuario;
 	public ArrayList<Chat> lista_chat;
+	public Connection cn;
+	
+
+	public User() {
+		if(cn==null)
+			cn = Database.getConexion();
+	}
 
 	public String getUsername() {
 		return username;
@@ -122,9 +136,6 @@ public class User {
 		this.v_usuario = v_usuario;
 	}
 
-	public User() {
-		super();
-	}
 
 	public User(String username, String password, String rol, String nombre, String apellidos, String id_medico,
 			String v_usuario, ArrayList<Chat> lista_chat) {
@@ -139,7 +150,31 @@ public class User {
 		this.lista_chat = lista_chat;
 	}
 	
+	public String userLogin(String username, String password) {
+		try {
+			PreparedStatement ps = cn.prepareStatement(LOGINQUERY);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if (rs != null) {
+				String rol = rs.getString("ROL");
+				return rol;
+			} else {
+				return ("ERROR");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ("ERROR");
+		}
 	
+	}
+	
+	/**
+	 * QUERY SQL
+	 */	
+	private static String LOGINQUERY = "select * from usuario where USERNAME=? and PASSWORD= ?";
+
 	
 
 }

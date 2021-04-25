@@ -1,5 +1,6 @@
 package application;
 
+import DDBB.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -9,7 +10,8 @@ import javafx.scene.layout.AnchorPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
+		
+		Database connection = new Database();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/Login.fxml"));
 		AnchorPane pane = loader.load();
 		Scene scene = new Scene(pane);

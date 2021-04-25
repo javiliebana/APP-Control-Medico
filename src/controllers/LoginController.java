@@ -24,6 +24,12 @@ import modelos.User;
 
 public class LoginController {
 	private Stage stage;
+	private User model;
+
+	public LoginController(User model) {
+		super();
+		this.model = model;
+	}
 
 	@FXML
 	private JFXButton buttonLogin;
@@ -74,14 +80,11 @@ public class LoginController {
 						JOptionPane.WARNING_MESSAGE);
 			}
 			
-			ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
-			for (User user : lista_usuarios) {
-				if (textfielduser.getText().equals(user.getUsername())
-						&& passwordfieldPW.getText().equals(user.getPassword())) {
-					System.out.println("usuario logado: "+user.getUsername());
+			String login = model.userLogin(textfielduser.getText().trim(), passwordfieldPW.getText());
+			
 					//verificar por roles M=medico U=paciente F=familiar
 					
-					if (user.getRol().equals("M")) {
+					if (login.equals("M")) {
 						
 						FXMLLoader loader_medic = new FXMLLoader(getClass().getResource("../views/VentanaSupervisor.fxml"));
 						MedicController contro_medic =  new MedicController();
@@ -98,7 +101,7 @@ public class LoginController {
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
 						stage.close();
 						
-					} else if(user.getRol().equals("U")){
+					} else if(login.equals("U")){
 						
 						FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/Users_GUI.fxml"));
 						UsersController contro_luser =  new UsersController();
@@ -115,7 +118,7 @@ public class LoginController {
 						Stage stage = (Stage) buttonLogin.getScene().getWindow();
 						stage.close();
 
-					}else if(user.getRol().equals("F")) {
+					}else if(login.equals("F")) {
 						FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaFamiliaUsuarios.fxml"));
 						FamilyUserController contro_luser =  new FamilyUserController();
 						loader_user.setController(contro_luser);
