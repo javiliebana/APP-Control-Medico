@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXTextArea;
 
+import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import modelos.Chat;
 import modelos.HistoriaMedico;
+import modelos.Paciente;
 import modelos.SensorMov;
 import modelos.SensorTemp;
 import modelos.User;
@@ -208,13 +210,13 @@ public class UsersController {
 	}
 	
 	public void mostrarDatos(User user) {
-		
 		//cargamos los datos del usuario
+		Paciente paciente = Database.cargarPaciente(user.getId());
 		this.user = user;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
-		lblPoliza.setText(user.getPoliza());
+		lblPoliza.setText(paciente.getDescripcion());
 		String dato_temp = "";
 		String dato_sensor_mov="";
 		String auxFecha = "";
@@ -227,10 +229,12 @@ public class UsersController {
 		List<Tab> pane_list=tabPane.getTabs();
 		tabPane.getTabs().removeAll(pane_list);
 
+		//cargamos las historias medicas en una arraylist
+		ArrayList<HistoriaMedico> lista_historias = Database.cargarHistoriasMedicas(paciente.getId_paciente());
 		// sacamos los a�os para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
-		for (HistoriaMedico h : user.getLista_historia_medico()) {
-			String date = h.getFecha().substring(h.getFecha().length() - 4);
+		for (HistoriaMedico h : lista_historias) {
+			String date = h.getFecha().substring(0,4);
 			if (!list_year.contains(date)) {
 				list_year.add(date);
 			}
@@ -240,8 +244,8 @@ public class UsersController {
 		Collections.sort(list_year);
 		for (String s : list_year) {
 			accordion = new Accordion();
-			for (HistoriaMedico h : user.getLista_historia_medico()) {
-				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
+			for (HistoriaMedico h : lista_historias) {
+				if (s.contains(h.getFecha().substring(0,4))) {
 					TitledPane tp = new TitledPane();
 					tp.setText("Historial médico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
@@ -256,29 +260,32 @@ public class UsersController {
 			tabPane.getTabs().add(year);
 
 		}
+		//cargamos los datos para temperatura y mov
+		ArrayList<SensorTemp> lista_temp = Database.cargarListaTemperaturas(paciente.getId_paciente());
+		ArrayList<SensorMov> lista_mov = Database.cargarListaMovimiento(paciente.getId_paciente());
 
-		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
+		for (SensorTemp t : lista_temp) {
+			dato_temp += t.getFecha_d() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
 					+ t.getTemp_n() + "\n";
 		}
 		textAreaTemp.setText(dato_temp);
 		
-		for (SensorMov sm : user.getLista_sensor_mov()) {
-			if (sm.getAlerta().equals("T")) {
-				dato_sensor_mov +=sm.getFecha()+"\n"+"      Ha salido del domicilio\n";
-			}
+		for (SensorMov sm : lista_mov) {
+			
+			dato_sensor_mov +=sm.getFecha()+"\n"+"      Ha salido del domicilio por "+ sm.getAlerta()+"\n";
+			
 		}
 		txrareaAlert.setText(dato_sensor_mov);
-		
-		// mostrar texto escrito en el area del chat
-		for (Chat c : user.getLista_chat()) {
-			if (!auxFecha.equals(c.getFecha())) {
-				text += c.getFecha() + "\n";
-				auxFecha = c.getFecha();	
-			}	
-			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
-		}
-		textAreaChat.setText(text);
+//		
+//		// mostrar texto escrito en el area del chat
+//		for (Chat c : user.getLista_chat()) {
+//			if (!auxFecha.equals(c.getFecha())) {
+//				text += c.getFecha() + "\n";
+//				auxFecha = c.getFecha();	
+//			}	
+//			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
+//		}
+//		textAreaChat.setText(text);
 	}
 
 	public static boolean isNumeric(String strNum) {

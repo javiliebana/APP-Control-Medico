@@ -11,25 +11,41 @@ import DDBB.Database;
 
 public class User {
 
+	public int id;
 	public String username;
 	public String password;
-	public String rol;
-	public String sexo;
 	public String nombre;
 	public String apellidos;
-	public String poliza;
-	public ArrayList<HistoriaMedico> lista_historia_medico;
-	public ArrayList<SensorTemp> lista_sensor_temp;
-	public ArrayList<SensorMov> lista_sensor_mov;
-	public String id_medico;
-	public String v_usuario;
-	public ArrayList<Chat> lista_chat;
+	public String telefono;
+	public String dni;
+	public String rol;
+
 	public Connection cn;
-	
 
 	public User() {
-		if(cn==null)
+		if (cn == null)
 			cn = Database.getConexion();
+	}
+
+	public User(int id, String username, String password, String nombre, String apellidos, String telefono, String dni,
+			String rol) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
+		this.dni = dni;
+		this.rol = rol;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -56,12 +72,12 @@ public class User {
 		this.rol = rol;
 	}
 
-	public String getSexo() {
-		return sexo;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public String getNombre() {
@@ -80,101 +96,12 @@ public class User {
 		this.apellidos = apellidos;
 	}
 
-	public String getPoliza() {
-		return poliza;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setPoliza(String poliza) {
-		this.poliza = poliza;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
-
-	public ArrayList<HistoriaMedico> getLista_historia_medico() {
-		return lista_historia_medico;
-	}
-
-	public void setLista_historia_medico(ArrayList<HistoriaMedico> lista_historia_medico) {
-		this.lista_historia_medico = lista_historia_medico;
-	}
-
-	public ArrayList<SensorTemp> getLista_sensor_temp() {
-		return lista_sensor_temp;
-	}
-
-	public void setLista_sensor_temp(ArrayList<SensorTemp> lista_sensor_temp) {
-		this.lista_sensor_temp = lista_sensor_temp;
-	}
-
-	public ArrayList<SensorMov> getLista_sensor_mov() {
-		return lista_sensor_mov;
-	}
-
-	public void setLista_sensor_mov(ArrayList<SensorMov> lista_sensor_mov) {
-		this.lista_sensor_mov = lista_sensor_mov;
-	}
-
-	public String getId_medico() {
-		return id_medico;
-	}
-
-	public void setId_medico(String id_medico) {
-		this.id_medico = id_medico;
-	}
-
-	public ArrayList<Chat> getLista_chat() {
-		return lista_chat;
-	}
-
-	public void setLista_chat(ArrayList<Chat> lista_chat) {
-		this.lista_chat = lista_chat;
-	}
-
-	public String getV_usuario() {
-		return v_usuario;
-	}
-
-	public void setV_usuario(String v_usuario) {
-		this.v_usuario = v_usuario;
-	}
-
-
-	public User(String username, String password, String rol, String nombre, String apellidos, String id_medico,
-			String v_usuario, ArrayList<Chat> lista_chat) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.rol = rol;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.id_medico = id_medico;
-		this.v_usuario = v_usuario;
-		this.lista_chat = lista_chat;
-	}
-	
-	public String userLogin(String username, String password) {
-		try {
-			PreparedStatement ps = cn.prepareStatement(LOGINQUERY);
-			ps.setString(1, username);
-			ps.setString(2, password);
-			ResultSet rs = ps.executeQuery();
-			if (rs != null) {
-				String rol = rs.getString("ROL");
-				return rol;
-			} else {
-				return ("ERROR");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return ("ERROR");
-		}
-	
-	}
-	
-	/**
-	 * QUERY SQL
-	 */	
-	private static String LOGINQUERY = "select * from usuario where USERNAME=? and PASSWORD= ?";
-
-	
 
 }

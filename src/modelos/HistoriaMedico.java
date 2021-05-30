@@ -1,15 +1,33 @@
 package modelos;
 
 public class HistoriaMedico {
-	String fecha;
+	int id_historia;
+	int id_paciente;
 	String descripcion;
+	String fecha;
 
-	public String getFecha() {
-		return fecha;
+	public HistoriaMedico(int id_historia, int id_paciente, String descripcion, String fecha) {
+		super();
+		this.id_historia = id_historia;
+		this.id_paciente = id_paciente;
+		this.descripcion = descripcion;
+		this.fecha = fecha;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public int getId_historia() {
+		return id_historia;
+	}
+
+	public void setId_historia(int id_historia) {
+		this.id_historia = id_historia;
+	}
+
+	public int getId_paciente() {
+		return id_paciente;
+	}
+
+	public void setId_paciente(int id_paciente) {
+		this.id_paciente = id_paciente;
 	}
 
 	public String getDescripcion() {
@@ -20,15 +38,12 @@ public class HistoriaMedico {
 		this.descripcion = descripcion;
 	}
 
-	public HistoriaMedico() {
-		super();
+	public String getFecha() {
+		return fecha;
 	}
 
-	public HistoriaMedico(String fecha, String descripcion) {
-		super();
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
-		this.descripcion = descripcion;
 	}
-	
 
 }
