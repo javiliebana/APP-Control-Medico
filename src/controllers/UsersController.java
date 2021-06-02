@@ -25,6 +25,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import modelos.Chat;
 import modelos.HistoriaMedico;
+import modelos.Mensaje;
 import modelos.Paciente;
 import modelos.SensorMov;
 import modelos.SensorTemp;
@@ -33,6 +34,7 @@ import modelos.User;
 public class UsersController {
 
 	User user;
+	Chat chat;
 
 	@FXML
 	private Label lblNombre;
@@ -82,136 +84,124 @@ public class UsersController {
     
 	@FXML
 	void enviarMessage(MouseEvent event) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDateTime now = LocalDateTime.now();
-		String fecha = dtf.format(now).toString();
+
 		String text = etText.getText().toString();
+		Mensaje new_msg = new Mensaje(0, chat.getId_chat(), user.getUsername(), text, "");
+		Database.sendMessage(new_msg);
 		
-		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-		
-		Chat c = new Chat(fecha, user.getId_medico(), user.getNombre(), text);
-		
-		for (int i = 0; i < list_user.size(); i++) {
-			// reemplazamos el usuario por sus nuevos datos
-			if (list_user.get(i).getUsername().equals(user.getUsername())) {
-				list_user.get(i).getLista_chat().add(c);
-				user.getLista_chat().add(c);
-			}
-			
-			JsonUtils.serializarArrayAJson(list_user);
-			mostrarDatos(user);
-		}
 		etText.setText("");
+		mostrarDatos(user);
+		
 	}
 	
 	@FXML
 	void enviarTempDay(MouseEvent event) {
 
-		boolean isday = true;
-		boolean newday = true;
-		boolean correctvalue = isNumeric(etTempDay.getText().toString());
-
-		// fecha actual
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDateTime now = LocalDateTime.now();
-		String fecha = dtf.format(now).toString();
-
-		for (SensorTemp st : user.getLista_sensor_temp()) {
-			if (st.getTemp_n().equals("0")) {
-				//si la temperatura de la noche es 0 es porque se hacreado ya un objeto con la temperatura de dia
-				isday = false;
-			} else if (st.getFecha().equals(fecha)) {
-				//si la fecha corresponde a la fecha del dia de hoy, el usuario ya ha registrado su temperatura diaria
-				newday = false;
-			}
-		}
-		
-		if (isday && newday && correctvalue) {
-
-			// valor noche = 0 para despues buscar el obj temperatura con valor noche=0 y
-			// reemplazarlo
-			String temp_day = etTempDay.getText().toString();
-			String temp_night = "0";
-			SensorTemp st = new SensorTemp(fecha, temp_day, temp_night);
-
-			ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-			for (int i = 0; i < list_user.size(); i++) {
-				// reemplazamos el usuario por sus nuevos datos
-				if (list_user.get(i).getUsername().equals(user.getUsername())) {
-					list_user.get(i).getLista_sensor_temp().add(st);
-					user.getLista_sensor_temp().add(st);
-				}
-			}
-
-			JsonUtils.serializarArrayAJson(list_user);
-			mostrarDatos(user);
-			etTempDay.setText("");
-		} else if (isday && !newday) {
-			JOptionPane.showMessageDialog(null, "Solo una toma de temperatura de dia y otra de noche", "Error",
-					JOptionPane.WARNING_MESSAGE);
-		} else if (!correctvalue) {
-			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
-					JOptionPane.WARNING_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Ya ha introducido una temperatura", "Error",
-					JOptionPane.WARNING_MESSAGE);
-		}
+//		boolean isday = true;
+//		boolean newday = true;
+//		boolean correctvalue = isNumeric(etTempDay.getText().toString());
+//
+//		// fecha actual
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//		LocalDateTime now = LocalDateTime.now();
+//		String fecha = dtf.format(now).toString();
+//
+//		for (SensorTemp st : user.getLista_sensor_temp()) {
+//			if (st.getTemp_n().equals("0")) {
+//				//si la temperatura de la noche es 0 es porque se hacreado ya un objeto con la temperatura de dia
+//				isday = false;
+//			} else if (st.getFecha().equals(fecha)) {
+//				//si la fecha corresponde a la fecha del dia de hoy, el usuario ya ha registrado su temperatura diaria
+//				newday = false;
+//			}
+//		}
+//		
+//		if (isday && newday && correctvalue) {
+//
+//			// valor noche = 0 para despues buscar el obj temperatura con valor noche=0 y
+//			// reemplazarlo
+//			String temp_day = etTempDay.getText().toString();
+//			String temp_night = "0";
+//			SensorTemp st = new SensorTemp(fecha, temp_day, temp_night);
+//
+//			ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+//			for (int i = 0; i < list_user.size(); i++) {
+//				// reemplazamos el usuario por sus nuevos datos
+//				if (list_user.get(i).getUsername().equals(user.getUsername())) {
+//					list_user.get(i).getLista_sensor_temp().add(st);
+//					user.getLista_sensor_temp().add(st);
+//				}
+//			}
+//
+//			JsonUtils.serializarArrayAJson(list_user);
+//			mostrarDatos(user);
+//			etTempDay.setText("");
+//		} else if (isday && !newday) {
+//			JOptionPane.showMessageDialog(null, "Solo una toma de temperatura de dia y otra de noche", "Error",
+//					JOptionPane.WARNING_MESSAGE);
+//		} else if (!correctvalue) {
+//			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
+//					JOptionPane.WARNING_MESSAGE);
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Ya ha introducido una temperatura", "Error",
+//					JOptionPane.WARNING_MESSAGE);
+//		}
 		
 	}
 
 	@FXML
 	void enviarTempNight(MouseEvent event) {
 
-		boolean isnight = false;
-		boolean correctvalue = isNumeric(etTempNight.getText().toString());
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDateTime now = LocalDateTime.now();
-		String fecha = dtf.format(now).toString();
-		String temp_night = etTempNight.getText().toString();
-
-		if (correctvalue) {
-			for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
-
-				if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
-					//si existe una temperatura =0 entonces si es de noche
-					isnight = true;
-				}
-				if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
-					user.getLista_sensor_temp().get(i).setTemp_n(temp_night);
-				}
-
-			}
-
-			if (isnight) {
-				ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-				for (int i = 0; i < list_user.size(); i++) {
-					if (list_user.get(i).getUsername().equals(user.getUsername())) {
-						for (SensorTemp temp : list_user.get(i).getLista_sensor_temp()) {
-							if (temp.getFecha().equals(fecha)) {
-								temp.setTemp_n(temp_night);
-							}
-						}
-					}
-				}
-
-				JsonUtils.serializarArrayAJson(list_user);
-				mostrarDatos(user);
-				etTempNight.setText("");
-
-			} else {
-				JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
-						JOptionPane.WARNING_MESSAGE);
-			}
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
-					JOptionPane.WARNING_MESSAGE);
-		}
+//		boolean isnight = false;
+//		boolean correctvalue = isNumeric(etTempNight.getText().toString());
+//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//		LocalDateTime now = LocalDateTime.now();
+//		String fecha = dtf.format(now).toString();
+//		String temp_night = etTempNight.getText().toString();
+//
+//		if (correctvalue) {
+//			for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
+//
+//				if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
+//					//si existe una temperatura =0 entonces si es de noche
+//					isnight = true;
+//				}
+//				if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
+//					user.getLista_sensor_temp().get(i).setTemp_n(temp_night);
+//				}
+//
+//			}
+//
+//			if (isnight) {
+//				ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
+//				for (int i = 0; i < list_user.size(); i++) {
+//					if (list_user.get(i).getUsername().equals(user.getUsername())) {
+//						for (SensorTemp temp : list_user.get(i).getLista_sensor_temp()) {
+//							if (temp.getFecha().equals(fecha)) {
+//								temp.setTemp_n(temp_night);
+//							}
+//						}
+//					}
+//				}
+//
+//				JsonUtils.serializarArrayAJson(list_user);
+//				mostrarDatos(user);
+//				etTempNight.setText("");
+//
+//			} else {
+//				JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
+//						JOptionPane.WARNING_MESSAGE);
+//			}
+//
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
+//					JOptionPane.WARNING_MESSAGE);
+//		}
 	}
 	
 	public void mostrarDatos(User user) {
 		//cargamos los datos del usuario
-		Paciente paciente = Database.cargarPaciente(user.getId());
+		Paciente paciente = Database.getPacienteFromIDUsuario(user.getId());
 		this.user = user;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());
@@ -276,29 +266,32 @@ public class UsersController {
 			
 		}
 		txrareaAlert.setText(dato_sensor_mov);
-//		
-//		// mostrar texto escrito en el area del chat
-//		for (Chat c : user.getLista_chat()) {
-//			if (!auxFecha.equals(c.getFecha())) {
-//				text += c.getFecha() + "\n";
-//				auxFecha = c.getFecha();	
-//			}	
-//			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
-//		}
-//		textAreaChat.setText(text);
+		
+		// cargamos el chat y sus mensajes
+		Chat chat_user = Database.getChat(user.getId());
+		chat=chat_user;
+		
+		for (Mensaje msg : chat_user.getLista_mensajes()) {
+			if (!auxFecha.equals(msg.getFecha_msg())) {
+				text += msg.getFecha_msg() + "\n";
+				auxFecha = msg.getFecha_msg();	
+			}	
+			text += msg.getUsername() + ": "+ msg.getMsg() + "\n";
+		}
+		textAreaChat.setText(text);
 	}
 
-	public static boolean isNumeric(String strNum) {
-		if (strNum == null) {
-			return false;
-		}
-		try {
-			double d = Double.parseDouble(strNum);
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-		return true;
-	}
+//	public static boolean isNumeric(String strNum) {
+//		if (strNum == null) {
+//			return false;
+//		}
+//		try {
+//			double d = Double.parseDouble(strNum);
+//		} catch (NumberFormatException nfe) {
+//			return false;
+//		}
+//		return true;
+//	}
 	
 	
 }

@@ -32,7 +32,6 @@ public class MedicController {
 		String list_value = lvPacientes.getSelectionModel().getSelectedItem();
 		String[] valores_user = list_value.split(" ");
 		String username = valores_user[0].replaceAll("@", "").trim();
-		System.out.println(username);
 
 		for (User u : lista_usuarios) {
 			if (u.getUsername().equals(username)) {
@@ -46,7 +45,7 @@ public class MedicController {
 		Parent root2;
 		try {
 			root2 = loader_user.load();
-			control_user.mostrarDatos(paciente_seleccionado, lista_usuarios);
+			control_user.mostrarDatos(medico_logado, paciente_seleccionado);
 			Stage stage = new Stage();
 			stage.setTitle("Ventana del paciente");
 			stage.setScene(new Scene(root2));

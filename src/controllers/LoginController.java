@@ -75,7 +75,6 @@ public class LoginController {
 				JOptionPane.showMessageDialog(null, "Introduce un valor para Contrase�a", "Atenci�n",
 						JOptionPane.WARNING_MESSAGE);
 			}
-			System.out.println(textfielduser.getText().trim()+" "+passwordfieldPW.getText());
 			User user_login = Database.userLogin(textfielduser.getText().trim(), passwordfieldPW.getText());
 
 			// verificar por roles M=medico P=paciente F=familiar
@@ -113,22 +112,22 @@ public class LoginController {
 				// cerramos la ventana del login
 				Stage stage = (Stage) buttonLogin.getScene().getWindow();
 				stage.close();
-//
-//			} else if (user_login.getRol().equals("F")) {
-//				FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaFamiliaUsuarios.fxml"));
-//				FamilyUserController contro_luser = new FamilyUserController();
-//				loader_user.setController(contro_luser);
-//				Parent root2 = loader_user.load();
-//				contro_luser.mostrarDatos(user_login);
-//				Scene familyscene = new Scene(root2);
-//				familyscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
-//				stage = new Stage();
-//				stage.setTitle("Ventana del familiar");
-//				stage.setScene(familyscene);
-//				stage.show();
-//				// cerramos la ventana del login
-//				Stage stage = (Stage) buttonLogin.getScene().getWindow();
-//				stage.close();
+
+			} else if (user_login.getRol().equals("F")) {
+				FXMLLoader loader_user = new FXMLLoader(getClass().getResource("../views/VentanaFamiliaUsuarios.fxml"));
+				FamilyUserController contro_luser = new FamilyUserController();
+				loader_user.setController(contro_luser);
+				Parent root2 = loader_user.load();
+				contro_luser.mostrarDatos(user_login);
+				Scene familyscene = new Scene(root2);
+				familyscene.getStylesheets().addAll(getClass().getResource("../css/userwindow.css").toExternalForm());
+				stage = new Stage();
+				stage.setTitle("Ventana del familiar");
+				stage.setScene(familyscene);
+				stage.show();
+				// cerramos la ventana del login
+				Stage stage = (Stage) buttonLogin.getScene().getWindow();
+				stage.close();
 			}
 
 		} catch (IOException e) {

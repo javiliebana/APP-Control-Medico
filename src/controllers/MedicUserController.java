@@ -8,9 +8,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.lang.model.util.Elements;
+
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 
+import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,14 +36,18 @@ import javafx.stage.Stage;
 import modelos.Chat;
 import modelos.HistoriaMedico;
 import modelos.IdFamiliares;
+import modelos.Mensaje;
+import modelos.Paciente;
 import modelos.SensorMov;
 import modelos.SensorTemp;
 import modelos.User;
 
 public class MedicUserController {
-	public User user;
+	public User medic, user;
+	public Paciente paciente;
 	public User selected_user;
-	public ArrayList<User> lista_usuarios;
+	public ArrayList<User> lista_familiares;
+	Chat chat;
 
 	@FXML
 	private Label lblNombre;
@@ -59,7 +66,7 @@ public class MedicUserController {
 
 	@FXML
 	private AnchorPane anchorpanehist;
-	
+
 	@FXML
 	private TabPane tabPane;
 
@@ -77,40 +84,26 @@ public class MedicUserController {
 
 	@FXML
 	private JFXListView<String> lvfamiliares;
-	
-    @FXML
-    private TextArea textAreaChat;
 
-    @FXML
-    private TextField etText;
+	@FXML
+	private TextArea textAreaChat;
 
-    @FXML
-    private Button btnSend;
-	
+	@FXML
+	private TextField etText;
+
+	@FXML
+	private Button btnSend;
+
 	@FXML
 	void enviarMessage(MouseEvent event) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDateTime now = LocalDateTime.now();
-		String fecha = dtf.format(now).toString();
 		String text = etText.getText().toString();
-		
-		ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-		
-		Chat c = new Chat(fecha, user.getNombre(), user.getId_medico(), text);
-		
-		for (int i = 0; i < list_user.size(); i++) {
-			// reemplazamos el usuario por sus nuevos datos
-			if (list_user.get(i).getUsername().equals(user.getUsername())) {
-				list_user.get(i).getLista_chat().add(c);
-				user.getLista_chat().add(c);
-			}
-			
-			JsonUtils.serializarArrayAJson(list_user);
-			mostrarDatos(user, list_user);
-		}
+		Mensaje new_msg = new Mensaje(0, chat.getId_chat(), medic.getUsername(), text, "");
+		Database.sendMessage(new_msg);
+
 		etText.setText("");
+		mostrarDatos(medic, user);
 	}
-	
+
 	@FXML
 	void addMedicHistory(MouseEvent event) {
 
@@ -120,10 +113,10 @@ public class MedicUserController {
 
 		try {
 			Parent root2 = loader_user.load();
-			control_user.loadData(user, lista_usuarios, this);
+			control_user.loadData(medic,user,paciente, this);
 			Stage stage = new Stage();
 			stage.setTitle("User");
-			Scene chatscene=new Scene(root2);
+			Scene chatscene = new Scene(root2);
 			chatscene.getStylesheets().addAll(getClass().getResource("../css/chat.css").toExternalForm());
 			stage.setScene(chatscene);
 			stage.show();
@@ -132,16 +125,15 @@ public class MedicUserController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// llamar a chat con familiar
 	@FXML
 	public void handleMouseClick(MouseEvent arg0) {
 		String list_value = lvfamiliares.getSelectionModel().getSelectedItem();
 		String[] valores_user = list_value.split(" ");
 		String username = valores_user[0].replaceAll("@", "").trim();
-		System.out.println(username);
 
-		for (User u : lista_usuarios) {
+		for (User u : lista_familiares) {
 			if (u.getUsername().equals(username)) {
 				selected_user = u;
 			}
@@ -153,7 +145,7 @@ public class MedicUserController {
 		Parent root2;
 		try {
 			root2 = loader_user.load();
-			control_user.mostrarDatos(selected_user, user.getId_medico());
+			control_user.mostrarDatos(selected_user, medic);
 			Stage stage = new Stage();
 			stage.setTitle("User");
 			stage.setScene(new Scene(root2));
@@ -164,103 +156,120 @@ public class MedicUserController {
 		}
 	}
 
-	public void mostrarDatos(User user, ArrayList<User> lista_usuarios) {
+	public void mostrarDatos(User medic, User user) {
 		// cargamos los datos del usuario
+		Paciente paciente = Database.getPacienteFromIDUsuario(user.getId());
+		this.medic = medic;
 		this.user = user;
-		this.lista_usuarios = lista_usuarios;
+		this.paciente=paciente;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
-		lblPoliza.setText(user.getPoliza());
+		lblPoliza.setText(paciente.getDescripcion());
 		String auxFecha = "";
 		String text = "";
-		
-		
-		List<Tab> pane_list=tabPane.getTabs();
+
+		// siempre que carguemos la ventana debemos borrar los datos del panel de citas
+		// medicas
+		List<Tab> pane_list = tabPane.getTabs();
 		tabPane.getTabs().removeAll(pane_list);
-		
-		
+		List<String> elements=lvfamiliares.getItems();
+		lvfamiliares.getItems().removeAll(elements);
+
 		String dato_temp = "";
 		String dato_sensor_mov = "";
+
+		// cargamos las historias medicas en una arraylist
+		ArrayList<HistoriaMedico> lista_historias = Database.cargarHistoriasMedicas(paciente.getId_paciente());
 		// sacamos los a�os para ver cuantos tabs creamos
 		ArrayList<String> list_year = new ArrayList<String>();
-		for (HistoriaMedico h : user.getLista_historia_medico()) {
-			String date = h.getFecha().substring(h.getFecha().length() - 4);
+		for (HistoriaMedico h : lista_historias) {
+			String date = h.getFecha().substring(0, 4);
 			if (!list_year.contains(date)) {
 				list_year.add(date);
 			}
 		}
-		//ordenamos la lista de a�os
+		// ordenamos la lista de a�os
+
 		Collections.sort(list_year);
-		
 		for (String s : list_year) {
 			accordion = new Accordion();
-			for (HistoriaMedico h : user.getLista_historia_medico()) {
-				if (s.contains(h.getFecha().substring(h.getFecha().length() - 4))) {
+			for (HistoriaMedico h : lista_historias) {
+				if (s.contains(h.getFecha().substring(0,4))) {
 					TitledPane tp = new TitledPane();
 					tp.setText("Historial médico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
 					descripcion.setText(h.getDescripcion());
 					tp.setContent(descripcion);
 					accordion.getPanes().add(tp);
+
 				}
+
 			}
 			Tab year = new Tab(s, accordion);
 			tabPane.getTabs().add(year);
 
 		}
 
-		for (SensorTemp t : user.getLista_sensor_temp()) {
-			dato_temp += t.getFecha() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
-					+ t.getTemp_n() + "\n";
-		}
-		textAreaTemp.setText(dato_temp);
+			// cargamos los datos para temperatura y mov
+			ArrayList<SensorTemp> lista_temp = Database.cargarListaTemperaturas(paciente.getId_paciente());
+			ArrayList<SensorMov> lista_mov = Database.cargarListaMovimiento(paciente.getId_paciente());
 
-		for (SensorMov sm : user.getLista_sensor_mov()) {
-			if (sm.getAlerta().equals("T")) {
-				dato_sensor_mov += sm.getFecha() + "\n" + "      Ha salido del domicilio\n";
+			for (SensorTemp t : lista_temp) {
+				dato_temp += t.getFecha_d() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
+						+ t.getTemp_n() + "\n";
 			}
+			textAreaTemp.setText(dato_temp);
 
-		}
-		txrareaAlert.setText(dato_sensor_mov);
+			for (SensorMov sm : lista_mov) {
 
-		// cargamos los datos del line chart
-		final CategoryAxis xAxis = new CategoryAxis();
-		final NumberAxis yAxis = new NumberAxis();
-		xAxis.setLabel("Month");
-		graph_temp.getData().clear();
-		graph_temp.setTitle("Registro temperaturas");
+				dato_sensor_mov += sm.getFecha() + "\n" + "      Ha salido del domicilio por " + sm.getAlerta() + "\n";
 
-		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Temperatura día");
-		XYChart.Series series2 = new XYChart.Series();
-		series2.setName("Temperatura noche");
+			}
+			txrareaAlert.setText(dato_sensor_mov);
 
-		for (SensorTemp t : user.getLista_sensor_temp()) {
+			// cargamos los datos del line chart
+			final CategoryAxis xAxis = new CategoryAxis();
+			final NumberAxis yAxis = new NumberAxis();
+			xAxis.setLabel("Month");
+			graph_temp.getData().clear();
+			graph_temp.setTitle("Registro temperaturas");
 
-			series1.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp_d())));
-			series2.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp_n())));
-		}
-		graph_temp.getData().addAll(series1, series2);
+			XYChart.Series series1 = new XYChart.Series();
+			series1.setName("Temperatura día");
+			XYChart.Series series2 = new XYChart.Series();
+			series2.setName("Temperatura noche");
 
-		for (User u : lista_usuarios) {
-			if (user.getUsername().equals(u.getV_usuario())) {
+			for (SensorTemp t : lista_temp) {
+
+				series1.getData().add(new XYChart.Data(t.getFecha_d(), Double.parseDouble(t.getTemp_d())));
+			}
+			graph_temp.getData().addAll(series1, series2);
+
+			// cargamos la lisa de familiares que tienen asignado a este paciente
+			ArrayList<User> lista_familiares = Database.getListaFamiliares(paciente.getId_paciente());
+			this.lista_familiares = lista_familiares;
+			for (User u : lista_familiares) {
+
 				lvfamiliares.getItems().add("@" + u.getUsername() + "\n " + u.getNombre() + " " + u.getApellidos());
+
 			}
+
+			// cargamos el chat y sus mensajes
+			Chat chat_user = Database.getChat(user.getId());
+			chat=chat_user;
+			
+			for (Mensaje msg : chat_user.getLista_mensajes()) {
+				if (!auxFecha.equals(msg.getFecha_msg())) {
+					text += msg.getFecha_msg() + "\n";
+					auxFecha = msg.getFecha_msg();	
+				}	
+				text += msg.getUsername() + ": "+ msg.getMsg() + "\n";
+			}
+			textAreaChat.setText(text);
+
 		}
-		
-		txrareaAlert.setText(dato_sensor_mov);
-		
-		// mostrar texto escrito en el area del chat
-		for (Chat c : user.getLista_chat()) {
-			if (!auxFecha.equals(c.getFecha())) {
-				text += c.getFecha() + "\n";
-				auxFecha = c.getFecha();	
-			}	
-			text += c.getUsuario() + ": "+ c.getTexto() + "\n";
-		}
-		textAreaChat.setText(text);
 
 	}
 
-}
+
