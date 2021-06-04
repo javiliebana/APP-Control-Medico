@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelos.Chat;
+import modelos.Familiar;
 import modelos.HistoriaMedico;
 import modelos.Mensaje;
 import modelos.Paciente;
@@ -306,6 +307,64 @@ public class Database {
 		}
 	}
 
+	public static int getUserIDFromUsername(String username) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(GET_USER_ID_FROM_USERNAME);
+			ps.setString(1, username);
+			int id = 0;
+			ResultSet rs = ps.executeQuery();
+			if (rs != null && rs.next()) {
+
+				id = rs.getInt("ID_USUARIO");
+
+				return id;
+			}
+			return 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	public static ArrayList<User> getListaUsuariosPacientes() {
+		try {
+			ArrayList<User> lista_users = new ArrayList<User>();
+			PreparedStatement ps = conexion.prepareStatement(GET_USER_ROL_PACIENTE_LIST);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				User user = new User(rs.getInt("ID_USUARIO"), rs.getString("USERNAME"), rs.getString("PASSWORD"),
+						rs.getString("NOMBRE"), rs.getString("APELLIDO"), rs.getString("TELEFONO"), rs.getString("DNI"),
+						rs.getString("ROL"));
+				lista_users.add(user);
+			}
+			return lista_users;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static int getUserIDFromMedicID(int id) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(GET_USER_ID_FROM_MEDIC_ID);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if (rs != null && rs.next()) {
+
+				int paciente_id = rs.getInt("ID_USUARIO");
+
+				return paciente_id;
+			}
+			return 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 	/**
 	 * QUERY SQL
 	 */
@@ -320,8 +379,63 @@ public class Database {
 	private final static String LISTA_FAMILIARES = "select * from Usuario where ID_USUARIO in (select id_usuario from Familiar where ID_PACIENTE=?)";
 	private final static String GET_USER_FROM_ID = "select * from Usuario where ID_USUARIO=?";
 	private final static String GET_PACIENTE_FROM_ID_USER_FAMILIAR = "select * from Paciente where id_paciente=(select id_paciente from Familiar where id_usuario=?)";
+	private final static String GET_USER_ID_FROM_USERNAME = "select ID_USUARIO from Usuario where USERNAME=?";
+	private final static String GET_USER_ID_FROM_MEDIC_ID = "select ID_USUARIO from Medico where ID_MEDICO=?";
+	private final static String GET_USER_ROL_PACIENTE_LIST = "SELECT * FROM Usuario where ROL='P'";
 
 	private final static String INSERT_MSG_QUERY = "INSERT INTO Mensaje (ID_CHAT,USERNAME_SEND,MSG) values (?,?,?)";
 	private final static String INSERT_MEDIC_HISOTRY_QUERY = "INSERT INTO Historial_Medico (ID_PACIENTE,DESCRIPCION,FECHA_EVENTO) values(?,?,?)";
+	private final static String INSERT_NEW_USER = "INSERT INTO Usuario (USERNAME,PASSWORD,NOMBRE,APELLIDO,TELEFONO,DNI,ROL) values (?,?,?,?,?,?,?)";
+	private final static String INSERT_NEW_FAMILIAR = "INSERT INTO Familiar (ID_USUARIO,ID_PACIENTE) values (?,?)";
+	private final static String INSERT_NEW_CHAT = "INSERT INTO Chat (ID_USER_MEDIC,ID_USER) values (?,?)";
+
+	public static void insertNewUser(User new_user) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(INSERT_NEW_USER);
+			ps.setString(1, new_user.getUsername());
+			ps.setString(2, new_user.getPassword());
+			ps.setString(3, new_user.getNombre());
+			ps.setString(4, new_user.getApellidos());
+			ps.setString(5, new_user.getTelefono());
+			ps.setString(6, new_user.getDni());
+			ps.setString(7, new_user.getRol());
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
+
+	public static void insertNewFamiliar(Familiar new_familiar) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(INSERT_NEW_FAMILIAR);
+			ps.setInt(1, new_familiar.getId_usuario());
+			ps.setInt(2, new_familiar.getId_paciente());
+
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
+
+	public static void insertNewChat(Chat new_chat_familiar_medico) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(INSERT_NEW_CHAT);
+			ps.setInt(1, new_chat_familiar_medico.getId_medico());
+			ps.setInt(2, new_chat_familiar_medico.getId_usuario());
+
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
 
 }
