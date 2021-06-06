@@ -79,7 +79,12 @@ public class LoginController {
 
 			// verificar por roles M=medico P=paciente F=familiar
 
-			if (user_login.getRol().equals("M")) {
+			if (user_login==null) {
+				
+				JOptionPane.showMessageDialog(null, "El usuario no existe", "Atenci�n",
+						JOptionPane.WARNING_MESSAGE);
+				
+			}else if (user_login.getRol().equals("M")) {
 
 				FXMLLoader loader_medic = new FXMLLoader(getClass().getResource("../views/VentanaSupervisor.fxml"));
 				MedicController contro_medic = new MedicController();
