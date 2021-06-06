@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 
@@ -85,6 +86,9 @@ public class FamilyUserController {
 
 	@FXML
 	private Button btnSend;
+	
+    @FXML
+    private JFXButton btnRefresh;
 
 	@FXML
 	void enviarMessage(MouseEvent event) {
@@ -95,6 +99,11 @@ public class FamilyUserController {
 		etText.setText("");
 		mostrarDatos(familiar);
 	}
+	
+	@FXML
+    void refreshData(MouseEvent event) {
+		mostrarDatos(familiar);
+    }
 
 	public void mostrarDatos(User familiar) {
 		// cargamos los datos del usuario

@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.lang.model.util.Elements;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 
@@ -95,6 +96,9 @@ public class MedicUserController {
 	private Button btnSend;
 
 	@FXML
+	private JFXButton btnRefresh;
+
+	@FXML
 	void enviarMessage(MouseEvent event) {
 		String text = etText.getText().toString();
 		Mensaje new_msg = new Mensaje(0, chat.getId_chat(), medic.getUsername(), text, "");
@@ -113,7 +117,7 @@ public class MedicUserController {
 
 		try {
 			Parent root2 = loader_user.load();
-			control_user.loadData(medic,user,paciente, this);
+			control_user.loadData(medic, user, paciente, this);
 			Stage stage = new Stage();
 			stage.setTitle("User");
 			Scene chatscene = new Scene(root2);
@@ -124,6 +128,11 @@ public class MedicUserController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@FXML
+	void refreshData(MouseEvent event) {
+		mostrarDatos(medic, user);
 	}
 
 	// llamar a chat con familiar
@@ -161,7 +170,7 @@ public class MedicUserController {
 		Paciente paciente = Database.getPacienteFromIDUsuario(user.getId());
 		this.medic = medic;
 		this.user = user;
-		this.paciente=paciente;
+		this.paciente = paciente;
 		lblTituloNombre.setText(user.getNombre() + " " + user.getApellidos());
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
@@ -173,7 +182,7 @@ public class MedicUserController {
 		// medicas
 		List<Tab> pane_list = tabPane.getTabs();
 		tabPane.getTabs().removeAll(pane_list);
-		List<String> elements=lvfamiliares.getItems();
+		List<String> elements = lvfamiliares.getItems();
 		lvfamiliares.getItems().removeAll(elements);
 
 		String dato_temp = "";
@@ -195,7 +204,7 @@ public class MedicUserController {
 		for (String s : list_year) {
 			accordion = new Accordion();
 			for (HistoriaMedico h : lista_historias) {
-				if (s.contains(h.getFecha().substring(0,4))) {
+				if (s.contains(h.getFecha().substring(0, 4))) {
 					TitledPane tp = new TitledPane();
 					tp.setText("Historial médico " + h.getFecha());
 					JFXTextArea descripcion = new JFXTextArea();
@@ -211,66 +220,64 @@ public class MedicUserController {
 
 		}
 
-			// cargamos los datos para temperatura y mov
-			ArrayList<SensorTemp> lista_temp = Database.cargarListaTemperaturas(paciente.getId_paciente());
-			ArrayList<SensorMov> lista_mov = Database.cargarListaMovimiento(paciente.getId_paciente());
+		// cargamos los datos para temperatura y mov
+		ArrayList<SensorTemp> lista_temp = Database.cargarListaTemperaturas(paciente.getId_paciente());
+		ArrayList<SensorMov> lista_mov = Database.cargarListaMovimiento(paciente.getId_paciente());
 
-			for (SensorTemp t : lista_temp) {
-				dato_temp += t.getFecha() + "\nTemperatura: " + t.getTemp() + "\nPorcentaje de Humedad: "
-						+ t.getHumedad() + "%\n";
-			}
-			textAreaTemp.setText(dato_temp);
+		for (SensorTemp t : lista_temp) {
+			dato_temp += t.getFecha() + "\nTemperatura: " + t.getTemp() + "\nPorcentaje de Humedad: " + t.getHumedad()
+					+ "%\n";
+		}
+		textAreaTemp.setText(dato_temp);
 
-			for (SensorMov sm : lista_mov) {
+		for (SensorMov sm : lista_mov) {
 
-				dato_sensor_mov += sm.getFecha() + "\n" + "      Ha salido del domicilio por " + sm.getAlerta() + "\n";
+			dato_sensor_mov += sm.getFecha() + "\n" + "      Ha salido del domicilio por " + sm.getAlerta() + "\n";
 
-			}
-			txrareaAlert.setText(dato_sensor_mov);
+		}
+		txrareaAlert.setText(dato_sensor_mov);
 
-			// cargamos los datos del line chart
-			final CategoryAxis xAxis = new CategoryAxis();
-			final NumberAxis yAxis = new NumberAxis();
-			xAxis.setLabel("Month");
-			graph_temp.getData().clear();
-			graph_temp.setTitle("Registro temperatura y humedad");
+		// cargamos los datos del line chart
+		final CategoryAxis xAxis = new CategoryAxis();
+		final NumberAxis yAxis = new NumberAxis();
+		xAxis.setLabel("Month");
+		graph_temp.getData().clear();
+		graph_temp.setTitle("Registro temperatura y humedad");
 
-			XYChart.Series series1 = new XYChart.Series();
-			series1.setName("Temperatura (Cº)");
-			XYChart.Series series2 = new XYChart.Series();
-			series2.setName("Humedad (%)");
+		XYChart.Series series1 = new XYChart.Series();
+		series1.setName("Temperatura (Cº)");
+		XYChart.Series series2 = new XYChart.Series();
+		series2.setName("Humedad (%)");
 
-			for (SensorTemp t : lista_temp) {
+		for (SensorTemp t : lista_temp) {
 
-				series1.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp())));
-				series2.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getHumedad())));
-			}
-			graph_temp.getData().addAll(series1, series2);
+			series1.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp())));
+			series2.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getHumedad())));
+		}
+		graph_temp.getData().addAll(series1, series2);
 
-			// cargamos la lisa de familiares que tienen asignado a este paciente
-			ArrayList<User> lista_familiares = Database.getListaFamiliares(paciente.getId_paciente());
-			this.lista_familiares = lista_familiares;
-			for (User u : lista_familiares) {
+		// cargamos la lisa de familiares que tienen asignado a este paciente
+		ArrayList<User> lista_familiares = Database.getListaFamiliares(paciente.getId_paciente());
+		this.lista_familiares = lista_familiares;
+		for (User u : lista_familiares) {
 
-				lvfamiliares.getItems().add("@" + u.getUsername() + "\n " + u.getNombre() + " " + u.getApellidos());
-
-			}
-
-			// cargamos el chat y sus mensajes
-			Chat chat_user = Database.getChat(user.getId());
-			chat=chat_user;
-			
-			for (Mensaje msg : chat_user.getLista_mensajes()) {
-				if (!auxFecha.equals(msg.getFecha_msg())) {
-					text += msg.getFecha_msg() + "\n";
-					auxFecha = msg.getFecha_msg();	
-				}	
-				text += msg.getUsername() + ": "+ msg.getMsg() + "\n";
-			}
-			textAreaChat.setText(text);
+			lvfamiliares.getItems().add("@" + u.getUsername() + "\n " + u.getNombre() + " " + u.getApellidos());
 
 		}
 
+		// cargamos el chat y sus mensajes
+		Chat chat_user = Database.getChat(user.getId());
+		chat = chat_user;
+
+		for (Mensaje msg : chat_user.getLista_mensajes()) {
+			if (!auxFecha.equals(msg.getFecha_msg())) {
+				text += msg.getFecha_msg() + "\n";
+				auxFecha = msg.getFecha_msg();
+			}
+			text += msg.getUsername() + ": " + msg.getMsg() + "\n";
+		}
+		textAreaChat.setText(text);
+
 	}
 
-
+}

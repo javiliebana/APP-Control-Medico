@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 
 import DDBB.Database;
@@ -65,6 +66,9 @@ public class UsersController {
 	private Button btnTempDay;
 
 	@FXML
+	private JFXButton btnRefresh;
+
+	@FXML
 	private TextField etTempNight;
 
 	@FXML
@@ -84,7 +88,7 @@ public class UsersController {
 
 	@FXML
 	private Accordion accordion;
-	
+
 	@FXML
 	private LineChart<String, Number> graph_temp;
 
@@ -101,108 +105,8 @@ public class UsersController {
 	}
 
 	@FXML
-	void enviarTempDay(MouseEvent event) {
-
-//		boolean isday = true;
-//		boolean newday = true;
-//		boolean correctvalue = isNumeric(etTempDay.getText().toString());
-//
-//		// fecha actual
-//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//		LocalDateTime now = LocalDateTime.now();
-//		String fecha = dtf.format(now).toString();
-//
-//		for (SensorTemp st : user.getLista_sensor_temp()) {
-//			if (st.getTemp_n().equals("0")) {
-//				//si la temperatura de la noche es 0 es porque se hacreado ya un objeto con la temperatura de dia
-//				isday = false;
-//			} else if (st.getFecha().equals(fecha)) {
-//				//si la fecha corresponde a la fecha del dia de hoy, el usuario ya ha registrado su temperatura diaria
-//				newday = false;
-//			}
-//		}
-//		
-//		if (isday && newday && correctvalue) {
-//
-//			// valor noche = 0 para despues buscar el obj temperatura con valor noche=0 y
-//			// reemplazarlo
-//			String temp_day = etTempDay.getText().toString();
-//			String temp_night = "0";
-//			SensorTemp st = new SensorTemp(fecha, temp_day, temp_night);
-//
-//			ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-//			for (int i = 0; i < list_user.size(); i++) {
-//				// reemplazamos el usuario por sus nuevos datos
-//				if (list_user.get(i).getUsername().equals(user.getUsername())) {
-//					list_user.get(i).getLista_sensor_temp().add(st);
-//					user.getLista_sensor_temp().add(st);
-//				}
-//			}
-//
-//			JsonUtils.serializarArrayAJson(list_user);
-//			mostrarDatos(user);
-//			etTempDay.setText("");
-//		} else if (isday && !newday) {
-//			JOptionPane.showMessageDialog(null, "Solo una toma de temperatura de dia y otra de noche", "Error",
-//					JOptionPane.WARNING_MESSAGE);
-//		} else if (!correctvalue) {
-//			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
-//					JOptionPane.WARNING_MESSAGE);
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Ya ha introducido una temperatura", "Error",
-//					JOptionPane.WARNING_MESSAGE);
-//		}
-
-	}
-
-	@FXML
-	void enviarTempNight(MouseEvent event) {
-
-//		boolean isnight = false;
-//		boolean correctvalue = isNumeric(etTempNight.getText().toString());
-//		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//		LocalDateTime now = LocalDateTime.now();
-//		String fecha = dtf.format(now).toString();
-//		String temp_night = etTempNight.getText().toString();
-//
-//		if (correctvalue) {
-//			for (int i = 0; i < user.getLista_sensor_temp().size(); i++) {
-//
-//				if (user.getLista_sensor_temp().get(i).getTemp_n().equals("0")) {
-//					//si existe una temperatura =0 entonces si es de noche
-//					isnight = true;
-//				}
-//				if (user.getLista_sensor_temp().get(i).getFecha().equals(fecha)) {
-//					user.getLista_sensor_temp().get(i).setTemp_n(temp_night);
-//				}
-//
-//			}
-//
-//			if (isnight) {
-//				ArrayList<User> list_user = JsonUtils.desserializarJsonAArray();
-//				for (int i = 0; i < list_user.size(); i++) {
-//					if (list_user.get(i).getUsername().equals(user.getUsername())) {
-//						for (SensorTemp temp : list_user.get(i).getLista_sensor_temp()) {
-//							if (temp.getFecha().equals(fecha)) {
-//								temp.setTemp_n(temp_night);
-//							}
-//						}
-//					}
-//				}
-//
-//				JsonUtils.serializarArrayAJson(list_user);
-//				mostrarDatos(user);
-//				etTempNight.setText("");
-//
-//			} else {
-//				JOptionPane.showMessageDialog(null, "Debe introducir una fecha previa a la noche", "Error",
-//						JOptionPane.WARNING_MESSAGE);
-//			}
-//
-//		} else {
-//			JOptionPane.showMessageDialog(null, "Debe introducir un valor correcto", "Error",
-//					JOptionPane.WARNING_MESSAGE);
-//		}
+	void refreshData(MouseEvent event) {
+		mostrarDatos(user);
 	}
 
 	public void mostrarDatos(User user) {
