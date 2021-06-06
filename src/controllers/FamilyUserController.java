@@ -155,8 +155,8 @@ public class FamilyUserController {
 		ArrayList<SensorMov> lista_mov = Database.cargarListaMovimiento(paciente.getId_paciente());
 
 		for (SensorTemp t : lista_temp) {
-			dato_temp += t.getFecha_d() + "\nTemperatura de día: " + t.getTemp_d() + "\nTemperatura de noche: "
-					+ t.getTemp_n() + "\n";
+			dato_temp += t.getFecha() + "\nTemperatura: " + t.getTemp() + "\nPorcentaje de Humedad: "
+					+ t.getHumedad() + "%\n";
 		}
 		textAreaTemp.setText(dato_temp);
 
@@ -172,19 +172,20 @@ public class FamilyUserController {
 		final NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Month");
 		graph_temp.getData().clear();
-		graph_temp.setTitle("Registro temperaturas");
+		graph_temp.setTitle("Registro temperatura y humedad");
 
 		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Temperatura día");
+		series1.setName("Temperatura (Cº)");
 		XYChart.Series series2 = new XYChart.Series();
-		series2.setName("Temperatura noche");
+		series2.setName("Humedad (%)");
 
 		for (SensorTemp t : lista_temp) {
 
-			series1.getData().add(new XYChart.Data(t.getFecha_d(), Double.parseDouble(t.getTemp_d())));
+			series1.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getTemp())));
+			series2.getData().add(new XYChart.Data(t.getFecha(), Double.parseDouble(t.getHumedad())));
 		}
 		graph_temp.getData().addAll(series1, series2);
-
+		
 		// cargamos el chat y sus mensajes
 		Chat chat = Database.getChat(familiar.getId());
 		this.chat=chat;

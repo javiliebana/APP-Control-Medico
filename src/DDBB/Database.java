@@ -172,8 +172,8 @@ public class Database {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				SensorTemp stemp = new SensorTemp(rs.getInt("ID_TEMPERATURA"), rs.getInt("ID_PACIENTE"),
-						rs.getString("FECHA_TEMP_DIA"), rs.getString("FECHA_TEMP_NOCHE"), rs.getString("TEMP_DIA"),
-						rs.getString("TEMP_NOCHE"));
+						rs.getString("FECHA_TEMP"), rs.getString("TEMPERATURA"),
+						rs.getString("HUMEDAD"));
 				lista_temperaturas.add(stemp);
 			}
 			return lista_temperaturas;
