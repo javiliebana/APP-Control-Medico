@@ -1,19 +1,12 @@
 package controllers;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import javax.lang.model.util.Elements;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
-
 import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +29,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import modelos.Chat;
 import modelos.HistoriaMedico;
-import modelos.IdFamiliares;
 import modelos.Mensaje;
 import modelos.Paciente;
 import modelos.SensorMov;
@@ -175,6 +167,7 @@ public class MedicUserController {
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
 		lblPoliza.setText(paciente.getDescripcion());
+		Database.setTemp(paciente.getId_paciente());
 		String auxFecha = "";
 		String text = "";
 

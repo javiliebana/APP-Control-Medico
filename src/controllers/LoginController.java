@@ -1,8 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -13,20 +11,15 @@ import com.jfoenix.controls.JFXTextField;
 import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import modelos.User;
 
 public class LoginController {
 	private Stage stage;
-	private User model;
-
 	@FXML
 	private JFXButton buttonLogin;
 
@@ -79,12 +72,11 @@ public class LoginController {
 
 			// verificar por roles M=medico P=paciente F=familiar
 
-			if (user_login==null) {
-				
-				JOptionPane.showMessageDialog(null, "El usuario no existe", "Atenci�n",
-						JOptionPane.WARNING_MESSAGE);
-				
-			}else if (user_login.getRol().equals("M")) {
+			if (user_login == null) {
+
+				JOptionPane.showMessageDialog(null, "El usuario no existe", "Atenci�n", JOptionPane.WARNING_MESSAGE);
+
+			} else if (user_login.getRol().equals("M")) {
 
 				FXMLLoader loader_medic = new FXMLLoader(getClass().getResource("../views/VentanaSupervisor.fxml"));
 				MedicController contro_medic = new MedicController();

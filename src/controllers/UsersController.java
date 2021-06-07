@@ -4,11 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 
@@ -20,7 +17,6 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -117,6 +113,7 @@ public class UsersController {
 		lblNombre.setText(user.getNombre());
 		lblApellidos.setText(user.apellidos);
 		lblPoliza.setText(paciente.getDescripcion());
+		Database.setTemp(paciente.getId_paciente());
 		String dato_temp = "";
 		String dato_sensor_mov = "";
 		String auxFecha = "";

@@ -1,20 +1,15 @@
 package controllers;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
-
 import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
 import modelos.HistoriaMedico;
 import modelos.Paciente;
 import modelos.User;

@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import modelos.Chat;
@@ -28,10 +27,8 @@ public class Database {
 		// conexion a la base de datos
 		try {
 			// conectamos a db
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/medicapp", "root", "");
-			// conexion =
-			// DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/test",
-			// "prdsantiago", "*medicapp*2");
+			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/prmedicapp", "root", "");
+			//conexion = DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/prmedicapp", "prjliebana_admin","*medicapp*2");
 
 		} catch (SQLException eSQL) {
 			System.out.println("Error SQL: " + eSQL.toString());
@@ -172,8 +169,7 @@ public class Database {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				SensorTemp stemp = new SensorTemp(rs.getInt("ID_TEMPERATURA"), rs.getInt("ID_PACIENTE"),
-						rs.getString("FECHA_TEMP"), rs.getString("TEMPERATURA"),
-						rs.getString("HUMEDAD"));
+						rs.getString("FECHA_TEMP"), rs.getString("TEMPERATURA"), rs.getString("HUMEDAD"));
 				lista_temperaturas.add(stemp);
 			}
 			return lista_temperaturas;
@@ -364,31 +360,7 @@ public class Database {
 			return 0;
 		}
 	}
-
-	/**
-	 * QUERY SQL
-	 */
-	private final static String LOGINQUERY = "select * from Usuario where USERNAME=? and PASSWORD= ?";
-	private final static String MEDIC_USER_LIST = "SELECT * FROM Usuario where ROL='P' and ID_USUARIO in (select ID_USUARIO from paciente where ID_MEDICO=(select ID_MEDICO from medico where ID_USUARIO=?))";
-	private final static String PACIENTEQUERY = "select * from Paciente where ID_USUARIO=?";
-	private final static String HISTORIASQUERY = "select * from Historial_Medico where ID_PACIENTE=?";
-	private final static String TEMPSQUERY = "select * from Temperatura where ID_PACIENTE=?";
-	private final static String SENSORLISTQUERY = "select * from Movimiento where ID_PACIENTE=?";
-	private final static String CHATQUERYUSERTOMEDIC = "select * from CHAT where ID_USER=?";
-	private final static String MSGQUERY = "select * from Mensaje where ID_CHAT=?";
-	private final static String LISTA_FAMILIARES = "select * from Usuario where ID_USUARIO in (select id_usuario from Familiar where ID_PACIENTE=?)";
-	private final static String GET_USER_FROM_ID = "select * from Usuario where ID_USUARIO=?";
-	private final static String GET_PACIENTE_FROM_ID_USER_FAMILIAR = "select * from Paciente where id_paciente=(select id_paciente from Familiar where id_usuario=?)";
-	private final static String GET_USER_ID_FROM_USERNAME = "select ID_USUARIO from Usuario where USERNAME=?";
-	private final static String GET_USER_ID_FROM_MEDIC_ID = "select ID_USUARIO from Medico where ID_MEDICO=?";
-	private final static String GET_USER_ROL_PACIENTE_LIST = "SELECT * FROM Usuario where ROL='P'";
-
-	private final static String INSERT_MSG_QUERY = "INSERT INTO Mensaje (ID_CHAT,USERNAME_SEND,MSG) values (?,?,?)";
-	private final static String INSERT_MEDIC_HISOTRY_QUERY = "INSERT INTO Historial_Medico (ID_PACIENTE,DESCRIPCION,FECHA_EVENTO) values(?,?,?)";
-	private final static String INSERT_NEW_USER = "INSERT INTO Usuario (USERNAME,PASSWORD,NOMBRE,APELLIDO,TELEFONO,DNI,ROL) values (?,?,?,?,?,?,?)";
-	private final static String INSERT_NEW_FAMILIAR = "INSERT INTO Familiar (ID_USUARIO,ID_PACIENTE) values (?,?)";
-	private final static String INSERT_NEW_CHAT = "INSERT INTO Chat (ID_USER_MEDIC,ID_USER) values (?,?)";
-
+	
 	public static void insertNewUser(User new_user) {
 		try {
 			PreparedStatement ps = conexion.prepareStatement(INSERT_NEW_USER);
@@ -437,5 +409,45 @@ public class Database {
 		}
 
 	}
+
+	public static void setTemp(int id_paciente) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(TEMP_INICIO);
+			ps.setInt(1, id_paciente);
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		
+	}
+
+	/**
+	 * QUERY SQL
+	 */
+	private final static String LOGINQUERY = "select * from Usuario where USERNAME=? and PASSWORD= ?";
+	private final static String MEDIC_USER_LIST = "SELECT * FROM Usuario where ROL='P' and ID_USUARIO in (select ID_USUARIO from paciente where ID_MEDICO=(select ID_MEDICO from medico where ID_USUARIO=?))";
+	private final static String PACIENTEQUERY = "select * from Paciente where ID_USUARIO=?";
+	private final static String HISTORIASQUERY = "select * from Historial_Medico where ID_PACIENTE=?";
+	private final static String TEMPSQUERY = "select * from Temperatura where ID_PACIENTE=?";
+	private final static String SENSORLISTQUERY = "select * from Movimiento where ID_PACIENTE=?";
+	private final static String CHATQUERYUSERTOMEDIC = "select * from CHAT where ID_USER=?";
+	private final static String MSGQUERY = "select * from Mensaje where ID_CHAT=?";
+	private final static String TEMP_INICIO = "update Temperatura set ID_PACIENTE=? where ID_PACIENTE is null";
+	private final static String LISTA_FAMILIARES = "select * from Usuario where ID_USUARIO in (select id_usuario from Familiar where ID_PACIENTE=?)";
+	private final static String GET_USER_FROM_ID = "select * from Usuario where ID_USUARIO=?";
+	private final static String GET_PACIENTE_FROM_ID_USER_FAMILIAR = "select * from Paciente where id_paciente=(select id_paciente from Familiar where id_usuario=?)";
+	private final static String GET_USER_ID_FROM_USERNAME = "select ID_USUARIO from Usuario where USERNAME=?";
+	private final static String GET_USER_ID_FROM_MEDIC_ID = "select ID_USUARIO from Medico where ID_MEDICO=?";
+	private final static String GET_USER_ROL_PACIENTE_LIST = "SELECT * FROM Usuario where ROL='P'";
+
+	private final static String INSERT_MSG_QUERY = "INSERT INTO Mensaje (ID_CHAT,USERNAME_SEND,MSG) values (?,?,?)";
+	private final static String INSERT_MEDIC_HISOTRY_QUERY = "INSERT INTO Historial_Medico (ID_PACIENTE,DESCRIPCION,FECHA_EVENTO) values(?,?,?)";
+	private final static String INSERT_NEW_USER = "INSERT INTO Usuario (USERNAME,PASSWORD,NOMBRE,APELLIDO,TELEFONO,DNI,ROL) values (?,?,?,?,?,?,?)";
+	private final static String INSERT_NEW_FAMILIAR = "INSERT INTO Familiar (ID_USUARIO,ID_PACIENTE) values (?,?)";
+	private final static String INSERT_NEW_CHAT = "INSERT INTO Chat (ID_USER_MEDIC,ID_USER) values (?,?)";
+
+	
 
 }

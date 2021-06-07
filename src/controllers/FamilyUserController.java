@@ -1,21 +1,13 @@
 package controllers;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
-
 import DDBB.Database;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -30,7 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import modelos.Chat;
 import modelos.HistoriaMedico;
 import modelos.Mensaje;
@@ -116,6 +107,7 @@ public class FamilyUserController {
 		lblNombre.setText(user_paciente.getNombre());
 		lblApellidos.setText(user_paciente.apellidos);
 		lblPoliza.setText(paciente.getDescripcion());
+		Database.setTemp(paciente.getId_paciente());
 		String auxFecha = "";
 		String text = "";
 

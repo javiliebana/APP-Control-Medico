@@ -1,12 +1,8 @@
 package controllers;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-
 import DDBB.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
