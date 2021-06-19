@@ -27,8 +27,9 @@ public class Database {
 		// conexion a la base de datos
 		try {
 			// conectamos a db
-			//conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/prmedicapp", "root", "");
-			conexion = DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/prmedicapp", "prjliebana_admin","*medicapp*2");
+			 //conexion =DriverManager.getConnection("jdbc:mysql://localhost:3306/prmedicapp", "root","");
+			conexion = DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/prmedicapp", "prjliebana_admin",
+					"*medicapp*2");
 
 		} catch (SQLException eSQL) {
 			System.out.println("Error SQL: " + eSQL.toString());
@@ -360,7 +361,33 @@ public class Database {
 			return 0;
 		}
 	}
-	
+
+	public static void setTemp(int id_paciente) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(TEMP_INICIO);
+			ps.setInt(1, id_paciente);
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
+
+	public static void setMov(int id_paciente) {
+		try {
+			PreparedStatement ps = conexion.prepareStatement(MOV_INICIO);
+			ps.setInt(1, id_paciente);
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+
+	}
+
 	public static void insertNewUser(User new_user) {
 		try {
 			PreparedStatement ps = conexion.prepareStatement(INSERT_NEW_USER);
@@ -410,19 +437,6 @@ public class Database {
 
 	}
 
-	public static void setTemp(int id_paciente) {
-		try {
-			PreparedStatement ps = conexion.prepareStatement(TEMP_INICIO);
-			ps.setInt(1, id_paciente);
-			ResultSet rs = ps.executeQuery();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		}
-		
-	}
-
 	/**
 	 * QUERY SQL
 	 */
@@ -435,6 +449,7 @@ public class Database {
 	private final static String CHATQUERYUSERTOMEDIC = "select * from CHAT where ID_USER=?";
 	private final static String MSGQUERY = "select * from Mensaje where ID_CHAT=?";
 	private final static String TEMP_INICIO = "update Temperatura set ID_PACIENTE=? where ID_PACIENTE is null";
+	private final static String MOV_INICIO = "update Movimiento set ID_PACIENTE=? where ID_PACIENTE is null";
 	private final static String LISTA_FAMILIARES = "select * from Usuario where ID_USUARIO in (select id_usuario from Familiar where ID_PACIENTE=?)";
 	private final static String GET_USER_FROM_ID = "select * from Usuario where ID_USUARIO=?";
 	private final static String GET_PACIENTE_FROM_ID_USER_FAMILIAR = "select * from Paciente where id_paciente=(select id_paciente from Familiar where id_usuario=?)";
@@ -447,7 +462,5 @@ public class Database {
 	private final static String INSERT_NEW_USER = "INSERT INTO Usuario (USERNAME,PASSWORD,NOMBRE,APELLIDO,TELEFONO,DNI,ROL) values (?,?,?,?,?,?,?)";
 	private final static String INSERT_NEW_FAMILIAR = "INSERT INTO Familiar (ID_USUARIO,ID_PACIENTE) values (?,?)";
 	private final static String INSERT_NEW_CHAT = "INSERT INTO Chat (ID_USER_MEDIC,ID_USER) values (?,?)";
-
-	
 
 }

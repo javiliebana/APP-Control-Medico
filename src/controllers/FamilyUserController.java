@@ -108,6 +108,7 @@ public class FamilyUserController {
 		lblApellidos.setText(user_paciente.apellidos);
 		lblPoliza.setText(paciente.getDescripcion());
 		Database.setTemp(paciente.getId_paciente());
+		Database.setMov(paciente.getId_paciente());
 		String auxFecha = "";
 		String text = "";
 
