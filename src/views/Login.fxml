@@ -37,7 +37,7 @@
                         <Image url="@../../img/virus.png" />
                      </image>
                   </ImageView>
-                  <Label text="APP" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Label text="MedicApp" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets top="200.0" />
                      </GridPane.margin>
