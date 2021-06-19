@@ -27,8 +27,8 @@ public class Database {
 		// conexion a la base de datos
 		try {
 			// conectamos a db
-			conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/prmedicapp", "root", "");
-			//conexion = DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/prmedicapp", "prjliebana_admin","*medicapp*2");
+			//conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/prmedicapp", "root", "");
+			conexion = DriverManager.getConnection("jdbc:mariadb://2.139.176.212:3306/prmedicapp", "prjliebana_admin","*medicapp*2");
 
 		} catch (SQLException eSQL) {
 			System.out.println("Error SQL: " + eSQL.toString());
