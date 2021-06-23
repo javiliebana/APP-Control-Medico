@@ -101,16 +101,16 @@ public class RegisterController {
 			}
 			else {
 				boolean alreadyexist = false;
-				ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
-				for (User user : lista_usuarios) {
-					if (!alreadyexist) {
-						if (!textFieldUser.getText().trim().equals(user.getUsername())) {
-
-						} else {
-							alreadyexist = true;
-						}
-					}
-				}
+//				ArrayList<User> lista_usuarios = JsonUtils.desserializarJsonAArray();
+//				for (User user : lista_usuarios) {
+//					if (!alreadyexist) {
+//						if (!textFieldUser.getText().trim().equals(user.getUsername())) {
+//
+//						} else {
+//							alreadyexist = true;
+//						}
+//					}
+//				}
 
 				if (!alreadyexist) {
 
@@ -121,12 +121,12 @@ public class RegisterController {
 					String rol = "F";
 					String v_user = "";
 					String chat="";
-					for (User user : lista_usuarios) {
-						String name = user.getNombre() + " " + user.getApellidos();
-						if (name.equals(comboBox.getValue().toString())) {
-							v_user = user.getUsername();
-						}
-					}
+//					for (User user : lista_usuarios) {
+//						String name = user.getNombre() + " " + user.getApellidos();
+//						if (name.equals(comboBox.getValue().toString())) {
+//							v_user = user.getUsername();
+//						}
+//					}
 					
 					
 					User new_user = new User(0, username, password, nombre, apellidos, "", "", rol);
